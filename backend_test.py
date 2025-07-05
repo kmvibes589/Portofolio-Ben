@@ -10,8 +10,9 @@ class PortfolioAPITester:
         self.tests_run = 0
         self.tests_passed = 0
         self.test_results = []
+        self.supported_languages = ["en", "fr", "ar", "zh", "es"]
 
-    def run_test(self, name, method, endpoint, expected_status=200, data=None):
+    def run_test(self, name, method, endpoint, expected_status=200, data=None, params=None):
         """Run a single API test"""
         url = f"{self.api_url}/{endpoint}"
         headers = {'Content-Type': 'application/json'}
@@ -21,9 +22,9 @@ class PortfolioAPITester:
         
         try:
             if method == 'GET':
-                response = requests.get(url, headers=headers)
+                response = requests.get(url, headers=headers, params=params)
             elif method == 'POST':
-                response = requests.post(url, json=data, headers=headers)
+                response = requests.post(url, json=data, headers=headers, params=params)
             else:
                 raise ValueError(f"Unsupported method: {method}")
 

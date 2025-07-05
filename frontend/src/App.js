@@ -697,8 +697,15 @@ const AchievementsSection = ({ achievementsData, currentLang }) => {
   const titles = sectionTitles[currentLang] || sectionTitles.en;
 
   return (
-    <section id="achievements" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="achievements" className="py-20 bg-gray-50 relative">
+      <div className="absolute inset-0 opacity-5">
+        <img 
+          src="https://images.pexels.com/photos/7942524/pexels-photo-7942524.jpeg" 
+          alt="Academic Achievement Ceremony"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{titles.achievements}</h2>
           <div className="section-divider"></div>
@@ -710,7 +717,7 @@ const AchievementsSection = ({ achievementsData, currentLang }) => {
             <h3 className="text-2xl font-bold text-gray-900 mb-6">{titles.fellowships}</h3>
             <div className="space-y-4">
               {achievementsData?.fellowships?.map((fellowship, index) => (
-                <div key={index} className="achievement-card achievement-fellowship p-6 rounded-lg shadow-md card-hover">
+                <div key={index} className="achievement-card achievement-fellowship p-6 rounded-lg shadow-md card-hover bg-white">
                   <h4 className="text-lg font-bold text-gray-900 mb-2">{fellowship.title}</h4>
                   <p className="text-blue-600 font-semibold mb-1">{fellowship.organization}</p>
                   <p className="text-gray-600 text-sm mb-2">
@@ -735,7 +742,7 @@ const AchievementsSection = ({ achievementsData, currentLang }) => {
             <h3 className="text-2xl font-bold text-gray-900 mb-6">{titles.awards}</h3>
             <div className="space-y-4">
               {achievementsData?.awards?.map((award, index) => (
-                <div key={index} className="achievement-card achievement-award p-6 rounded-lg shadow-md card-hover">
+                <div key={index} className="achievement-card achievement-award p-6 rounded-lg shadow-md card-hover bg-white">
                   <h4 className="text-lg font-bold text-gray-900 mb-2">{award.title}</h4>
                   <p className="text-blue-600 font-semibold mb-1">{award.organization}</p>
                   <p className="text-gray-600 text-sm">{award.year}</p>

@@ -1,0 +1,880 @@
+[
+  {
+    "name": "Admin Login - Success",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/login",
+    "method": "POST",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiZW5qYW1pbl9hZG1pbiIsImV4cCI6MTc1MTc5ODY5Nn0.IDnGYvw4DJFDRZUodPqIpeOzcJGKKV1pkvw3i6ZBtq0",
+      "token_type": "bearer",
+      "expires_in": 86400
+    }
+  },
+  {
+    "name": "Admin Login - Failure",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/login",
+    "method": "POST",
+    "status_code": 401,
+    "expected_status": 401,
+    "success": true,
+    "response": {
+      "detail": "Incorrect username or password"
+    }
+  },
+  {
+    "name": "Admin Token Verification",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/verify",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "message": "Admin authenticated",
+      "username": "benjamin_admin"
+    }
+  },
+  {
+    "name": "Admin Token Verification - Invalid Token",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/verify",
+    "method": "GET",
+    "status_code": 401,
+    "expected_status": 401,
+    "success": true,
+    "response": {
+      "detail": "Invalid authentication credentials"
+    }
+  },
+  {
+    "name": "Media Upload - Image",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/media/upload",
+    "method": "POST",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "id": "b2958909-346c-4533-8b36-0346e15b39a3",
+      "filename": "d6cf8c4b-d618-4bd2-8032-2b2cc7393ce8.jpg",
+      "original_filename": "test_image.jpg",
+      "file_path": "/uploads/images/d6cf8c4b-d618-4bd2-8032-2b2cc7393ce8.jpg",
+      "file_type": "image",
+      "mime_type": "image/jpeg",
+      "file_size": 18,
+      "upload_date": "2025-07-05T10:44:56.741517",
+      "category": "profile",
+      "description": "Test profile image upload",
+      "is_active": true
+    }
+  },
+  {
+    "name": "Media Upload - Video",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/media/upload",
+    "method": "POST",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "id": "190ddca2-7eb2-4433-bd07-f88c0c0a5450",
+      "filename": "5d2c7818-b7ae-4c22-89d1-4a1e59a0fd72.mp4",
+      "original_filename": "test_video.mp4",
+      "file_path": "/uploads/videos/5d2c7818-b7ae-4c22-89d1-4a1e59a0fd72.mp4",
+      "file_type": "video",
+      "mime_type": "video/mp4",
+      "file_size": 18,
+      "upload_date": "2025-07-05T10:44:56.862885",
+      "category": "video",
+      "description": "Test video upload",
+      "is_active": true
+    }
+  },
+  {
+    "name": "Media Upload - Invalid File Type",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/media/upload",
+    "method": "POST",
+    "status_code": 400,
+    "expected_status": 400,
+    "success": true,
+    "response": {
+      "detail": "Unsupported file type"
+    }
+  },
+  {
+    "name": "Get All Media Files",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/media",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": [
+      {
+        "id": "190ddca2-7eb2-4433-bd07-f88c0c0a5450",
+        "filename": "5d2c7818-b7ae-4c22-89d1-4a1e59a0fd72.mp4",
+        "original_filename": "test_video.mp4",
+        "file_path": "/uploads/videos/5d2c7818-b7ae-4c22-89d1-4a1e59a0fd72.mp4",
+        "file_type": "video",
+        "mime_type": "video/mp4",
+        "file_size": 18,
+        "upload_date": "2025-07-05T10:44:56.862000",
+        "category": "video",
+        "description": "Test video upload",
+        "is_active": true
+      },
+      {
+        "id": "b2958909-346c-4533-8b36-0346e15b39a3",
+        "filename": "d6cf8c4b-d618-4bd2-8032-2b2cc7393ce8.jpg",
+        "original_filename": "test_image.jpg",
+        "file_path": "/uploads/images/d6cf8c4b-d618-4bd2-8032-2b2cc7393ce8.jpg",
+        "file_type": "image",
+        "mime_type": "image/jpeg",
+        "file_size": 18,
+        "upload_date": "2025-07-05T10:44:56.741000",
+        "category": "profile",
+        "description": "Test profile image upload",
+        "is_active": true
+      }
+    ]
+  },
+  {
+    "name": "Get Media Files - Image Filter",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/media",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": [
+      {
+        "id": "b2958909-346c-4533-8b36-0346e15b39a3",
+        "filename": "d6cf8c4b-d618-4bd2-8032-2b2cc7393ce8.jpg",
+        "original_filename": "test_image.jpg",
+        "file_path": "/uploads/images/d6cf8c4b-d618-4bd2-8032-2b2cc7393ce8.jpg",
+        "file_type": "image",
+        "mime_type": "image/jpeg",
+        "file_size": 18,
+        "upload_date": "2025-07-05T10:44:56.741000",
+        "category": "profile",
+        "description": "Test profile image upload",
+        "is_active": true
+      }
+    ]
+  },
+  {
+    "name": "Get Media Files - Video Filter",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/media",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": [
+      {
+        "id": "190ddca2-7eb2-4433-bd07-f88c0c0a5450",
+        "filename": "5d2c7818-b7ae-4c22-89d1-4a1e59a0fd72.mp4",
+        "original_filename": "test_video.mp4",
+        "file_path": "/uploads/videos/5d2c7818-b7ae-4c22-89d1-4a1e59a0fd72.mp4",
+        "file_type": "video",
+        "mime_type": "video/mp4",
+        "file_size": 18,
+        "upload_date": "2025-07-05T10:44:56.862000",
+        "category": "video",
+        "description": "Test video upload",
+        "is_active": true
+      }
+    ]
+  },
+  {
+    "name": "Get Media Files - Category Filter",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/media",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": [
+      {
+        "id": "b2958909-346c-4533-8b36-0346e15b39a3",
+        "filename": "d6cf8c4b-d618-4bd2-8032-2b2cc7393ce8.jpg",
+        "original_filename": "test_image.jpg",
+        "file_path": "/uploads/images/d6cf8c4b-d618-4bd2-8032-2b2cc7393ce8.jpg",
+        "file_type": "image",
+        "mime_type": "image/jpeg",
+        "file_size": 18,
+        "upload_date": "2025-07-05T10:44:56.741000",
+        "category": "profile",
+        "description": "Test profile image upload",
+        "is_active": true
+      }
+    ]
+  },
+  {
+    "name": "Update Media File",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/media/b2958909-346c-4533-8b36-0346e15b39a3",
+    "method": "PUT",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "id": "b2958909-346c-4533-8b36-0346e15b39a3",
+      "filename": "d6cf8c4b-d618-4bd2-8032-2b2cc7393ce8.jpg",
+      "original_filename": "test_image.jpg",
+      "file_path": "/uploads/images/d6cf8c4b-d618-4bd2-8032-2b2cc7393ce8.jpg",
+      "file_type": "image",
+      "mime_type": "image/jpeg",
+      "file_size": 18,
+      "upload_date": "2025-07-05T10:44:56.741000",
+      "category": "hero",
+      "description": "Updated test description",
+      "is_active": true
+    }
+  },
+  {
+    "name": "Get Media Files for Static Serving Test",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/media",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": [
+      {
+        "id": "190ddca2-7eb2-4433-bd07-f88c0c0a5450",
+        "filename": "5d2c7818-b7ae-4c22-89d1-4a1e59a0fd72.mp4",
+        "original_filename": "test_video.mp4",
+        "file_path": "/uploads/videos/5d2c7818-b7ae-4c22-89d1-4a1e59a0fd72.mp4",
+        "file_type": "video",
+        "mime_type": "video/mp4",
+        "file_size": 18,
+        "upload_date": "2025-07-05T10:44:56.862000",
+        "category": "video",
+        "description": "Test video upload",
+        "is_active": true
+      },
+      {
+        "id": "b2958909-346c-4533-8b36-0346e15b39a3",
+        "filename": "d6cf8c4b-d618-4bd2-8032-2b2cc7393ce8.jpg",
+        "original_filename": "test_image.jpg",
+        "file_path": "/uploads/images/d6cf8c4b-d618-4bd2-8032-2b2cc7393ce8.jpg",
+        "file_type": "image",
+        "mime_type": "image/jpeg",
+        "file_size": 18,
+        "upload_date": "2025-07-05T10:44:56.741000",
+        "category": "hero",
+        "description": "Updated test description",
+        "is_active": true
+      }
+    ]
+  },
+  {
+    "name": "Delete Media File",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/media/b2958909-346c-4533-8b36-0346e15b39a3",
+    "method": "DELETE",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "message": "Media file deleted successfully"
+    }
+  },
+  {
+    "name": "Admin Create Blog Post",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/blog",
+    "method": "POST",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "id": "12d8b8ea-2ec3-44e6-9765-4bb02546cded",
+      "title": "Admin Test Blog Post",
+      "content": "This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. ",
+      "excerpt": "A brief overview of the admin test blog post.",
+      "author": "Benjamin Kyamoneka Mpey",
+      "created_at": "2025-07-05T10:44:57.318895",
+      "updated_at": "2025-07-05T10:44:57.318896",
+      "published": true,
+      "tags": [
+        "Admin",
+        "Test",
+        "API"
+      ],
+      "category": "Law & Policy",
+      "featured_image": null,
+      "featured_video": null,
+      "reading_time": 1,
+      "paper_type": null,
+      "academic_info": null
+    }
+  },
+  {
+    "name": "Admin Get All Blog Posts",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/blog",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": [
+      {
+        "id": "12d8b8ea-2ec3-44e6-9765-4bb02546cded",
+        "title": "Admin Test Blog Post",
+        "content": "This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. ",
+        "excerpt": "A brief overview of the admin test blog post.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T10:44:57.318000",
+        "updated_at": "2025-07-05T10:44:57.318000",
+        "published": true,
+        "tags": [
+          "Admin",
+          "Test",
+          "API"
+        ],
+        "category": "Law & Policy",
+        "featured_image": null,
+        "featured_video": null,
+        "reading_time": 1,
+        "paper_type": null,
+        "academic_info": null
+      },
+      {
+        "id": "7adc4fa7-1c21-4f22-ba30-44eb1bedd685",
+        "title": "Test Academic Paper",
+        "content": "This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. ",
+        "excerpt": "A brief overview of the test academic paper and its findings.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T08:04:17.744000",
+        "updated_at": "2025-07-05T08:04:17.744000",
+        "published": true,
+        "tags": [
+          "Law & Policy",
+          "Climate Law",
+          "Test"
+        ],
+        "category": "Law & Policy",
+        "featured_image": null,
+        "featured_video": null,
+        "reading_time": 2,
+        "paper_type": "academic",
+        "academic_info": {
+          "institution": "Test University",
+          "field": "International Law",
+          "type": "Research Paper"
+        }
+      },
+      {
+        "id": "10c90c6f-1289-478a-b11a-6dfe619c9b3d",
+        "title": "From Streets to Screens: How Kenyan Gen Z Protests Against the Finance Bill Sparked a Pan-African Youth Movement",
+        "content": "Introduction\nImagine a generation born into a world of digital connectivity, yet disconnected from the opportunities it promised. In June 2023, Kenya's Gen Z young, restless, and relentless, took to the streets to defy a government that sought to impose a tax bill threatening their already fragile livelihoods. This was not just another protest; it was a youth-led revolution. With smartphones as their weapons and hashtags as their battle cries, they shook the foundations of power in Kenya and, in the process, sparked a fire of activism across Africa. From Nairobi to Lagos, from Cape Town to Kampala, Africa's youth were awakened, their voices now louder than ever. The message was clear: the time for passive acceptance was over, and the future of Africa belonged to its boldest generation yet.\n\nIn the middle of the year 2024, exactly on June 1, 2024, Kenya was shaken by widespread protests against the controversial Finance Bill 2024, a legislation that proposed increased taxes on fuel, housing, and digital content. The bill, part of President William Ruto's government's plan to raise revenue, was met with fierce opposition, especially from the country's youth.",
+        "excerpt": "Exploring how Kenya's Gen Z protests against the 2024 Finance Bill ignited a continent-wide youth movement, demonstrating the power of digital activism and cross-border solidarity in modern Africa.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:51:12.591000",
+        "updated_at": "2025-07-05T07:51:12.591000",
+        "published": true,
+        "tags": [
+          "Gen Z",
+          "Kenya",
+          "Youth Movement",
+          "Digital Activism",
+          "Pan-African",
+          "Social Media",
+          "Finance Bill"
+        ],
+        "category": "Youth Activism",
+        "featured_image": null,
+        "featured_video": null,
+        "reading_time": 1,
+        "paper_type": "article",
+        "academic_info": {
+          "type": "analytical_article",
+          "institution": "Mount Kenya University",
+          "field": "Political Science and Youth Studies"
+        }
+      },
+      {
+        "id": "af8914bd-48fd-4cbd-aaa1-647e68c4e36b",
+        "title": "From Political Domination to Economic Subjugation: Assessing the Impacts of International Financial Institutions on African Sovereignty",
+        "content": "Introduction\nIn 1983, tens of thousands of Zambians took to the streets in mass protests against the 1983 Agreement, a policy enforced under the structural adjustments programs (SAPs) of the International Monetary Fund (IMF) and the World Bank that involved among other things the devaluation of currency, decontrol of prices of essential commodities and the removal of subsidies on maize and fertilisers. Similarly, in 2024, Kenya was rocked by nationwide protests against the proposed 2024/2025 Finance Bill, which introduced steep tax hikes on basic commodities. For millions of Kenyans, already grappling with the rising cost of living, these measures were a direct assault to their livelihoods. The government, however, defended the bill as necessary to meet the stringent fiscal targets set by international lenders like the IMF, whose support was critical to Kenya's mounting debt crisis. Both of these scenes, not only encapsulate the complexities of Africa's economic journey, a journey shaped by both the pull of global agendas and the push for self-determination on the continent, but also echoe a deeper narrative across Africa: the persistent challenge of balancing the demands of global financial institutions with their own aspirations for sovereignty and sustainable development.",
+        "excerpt": "A critical analysis of how IMF and World Bank policies impact African sovereignty and sustainable development, examining the tension between global financial institutions and national self-determination.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:50:55.606000",
+        "updated_at": "2025-07-05T07:50:55.606000",
+        "published": true,
+        "tags": [
+          "IMF",
+          "World Bank",
+          "African Sovereignty",
+          "Economic Policy",
+          "Structural Adjustment",
+          "Development"
+        ],
+        "category": "International Economics",
+        "featured_image": null,
+        "featured_video": null,
+        "reading_time": 1,
+        "paper_type": "academic",
+        "academic_info": {
+          "type": "research_paper",
+          "institution": "Mount Kenya University",
+          "field": "International Economics and Development"
+        }
+      },
+      {
+        "id": "df74ec7b-5a7c-468b-b9b9-2c89907c1862",
+        "title": "The Legal Obligation of the State in Addressing Climate Change-Induced Disasters in the Global South",
+        "content": "Introduction\nOver the past three decades, in a changing world threatened by annihilation, humanity has negotiated to stabilize greenhouse gases for the survival of both present and future generations. Under the UN's patronage, states concluded agreements, including the UNFCCC and Paris Agreement, based on the core principle of common but differentiated responsibilities concerning climate-induced disasters, as enshrined under Article 3(1) of the UNFCCC. This principle, on one hand, underscores that developing countries, especially in the Global South, are entitled to differentiated responsibilities when addressing climate change disasters, owing to historical inequities in contribution to global emissions. As a matter of fact, according to the IPCC, climate change disproportionately impacts developing nations, with over 1 billion people expected to face acute food insecurity by 2050 due to climate-related challenges. On the other hand, it opines that developed nations, having historically contributed more to climate change, bear a greater burden in terms of mitigation and support. The two aforementioned agreements underscore the urgency for all nations, especially developed ones, to mitigate greenhouse gas emissions and assist developing countries, which bear the disproportionate effects of climate-induced disasters such as cyclones, droughts, and floods.",
+        "excerpt": "Examining the legal obligations of Global South states in addressing climate change-induced disasters while balancing human rights protection and indigenous peoples' rights.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:50:39.126000",
+        "updated_at": "2025-07-05T07:50:39.126000",
+        "published": true,
+        "tags": [
+          "Climate Change",
+          "Human Rights",
+          "Global South",
+          "Legal Obligations",
+          "Environmental Law"
+        ],
+        "category": "Climate Law",
+        "featured_image": null,
+        "featured_video": null,
+        "reading_time": 1,
+        "paper_type": "academic",
+        "academic_info": {
+          "type": "research_paper",
+          "institution": "Mount Kenya University",
+          "field": "Environmental and Climate Law"
+        }
+      },
+      {
+        "id": "50a42eee-39f9-48f8-9217-e889c31a80aa",
+        "title": "The Role of the Intellectual Property in Attaining the SDGs through Creativity and Innovation",
+        "content": "Introduction\nIn the face of a threat of annihilation due to climate change, in the past few decades, going from Tokyo to Rio, from Rio to Paris and from Paris to Baku, States and Non-States Actors engaged into various negotiations aimed at promoting sustainable development. The concept of Sustainable Development was defined in the Brundtland report of 1987 titled \"Our Common Future\" as a form of development that meets the needs of the present without compromising the ability of future generations to meet their own needs. At the Earth Summit held in Rio de Janeiro in June 1992, Sustainable Development was recognized and subsequently translated into a series of agreements, including the Paris Agreement of 2015. In September 2015, the United Nations adopted 17 goals of Sustainable Development as part of its 2030 Agenda. In 2023, the United Nations Economic and Social Council in its report noted that at the midpoint to 2030, global progress on SDGs remain uneven and the world is not even on track to achieve SDGs. According to the WTO, Intellectual Property Rights (IPRs) are the rights given to persons over the creations of their minds. Their origins can be traced to the need for individuals and societies to foster creativity and innovation. However, despite its ability to drive change through creativity and innovation, the IP has been understated within various international agreements. In this regard, considering the urgency of attaining SDGs, this essay firstly elaborates on the types of IPRs and their legal regimes, secondly it demonstrates the critical role of IP in attaining SDGs through the reduction of inequalities, promotion of innovation, creation of jobs and alleviation of poverty. Lastly, it tackles commercialization and enforcement challenges of IPRs.",
+        "excerpt": "An in-depth analysis of how Intellectual Property Rights serve as catalysts for achieving the UN Sustainable Development Goals through creativity, innovation, and economic empowerment.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:50:21.689000",
+        "updated_at": "2025-07-05T07:50:21.689000",
+        "published": true,
+        "tags": [
+          "Intellectual Property",
+          "SDGs",
+          "Innovation",
+          "Sustainable Development",
+          "Legal Analysis"
+        ],
+        "category": "Law & Policy",
+        "featured_image": null,
+        "featured_video": null,
+        "reading_time": 1,
+        "paper_type": "academic",
+        "academic_info": {
+          "type": "research_paper",
+          "institution": "Mount Kenya University",
+          "field": "International Law"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Admin Update Blog Post",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/blog/12d8b8ea-2ec3-44e6-9765-4bb02546cded",
+    "method": "PUT",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "id": "12d8b8ea-2ec3-44e6-9765-4bb02546cded",
+      "title": "Updated Admin Test Blog Post",
+      "content": "This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. This is a test blog post created through the admin API. ",
+      "excerpt": "Updated excerpt for the admin test blog post.",
+      "author": "Benjamin Kyamoneka Mpey",
+      "created_at": "2025-07-05T10:44:57.318000",
+      "updated_at": "2025-07-05T10:44:57.382000",
+      "published": true,
+      "tags": [
+        "Admin",
+        "Test",
+        "Updated"
+      ],
+      "category": "Law & Policy",
+      "featured_image": null,
+      "featured_video": null,
+      "reading_time": 1,
+      "paper_type": null,
+      "academic_info": null
+    }
+  },
+  {
+    "name": "Admin Delete Blog Post",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/admin/blog/12d8b8ea-2ec3-44e6-9765-4bb02546cded",
+    "method": "DELETE",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "message": "Blog post deleted successfully"
+    }
+  },
+  {
+    "name": "Get Portfolio About Data",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/portfolio/about",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "name": "Kyamoneka Mpey Benjamin",
+      "title": "Human Rights Defender | Privacy First Campaigner at Amnesty International",
+      "tagline": "Empowering Youth. Defending Rights. Inspiring Change.",
+      "quote": "Human rights are not a privilege conferred by the state. They are every human being's entitlement by virtue of their humanity.",
+      "age": 21,
+      "nationality": "Congolese",
+      "based_in": "Kenya",
+      "education": "Law Student at Mount Kenya University \u2013 School of Law",
+      "phone": "+254 797 427 649",
+      "email": "kyamompey@gmail.com",
+      "linkedin": "kyamoneka-mpey-benjamin",
+      "bio": "I am a Congolese law student at Mount Kenya University \u2013 School of Law, with a passion for justice, human rights, and environmental sustainability. My advocacy focuses on climate action, digital rights, gender equality, anti-corruption, and legal empowerment.\n\nCurrently, I serve as a Campaign Advocate at Amnesty International Kenya, supporting the Privacy First Campaign. My leadership roles include Managing Partner at Legal Alliance Associates where I've trained 114+ law students, Country Director (DRC) of The Lawrit Journal of Law promoting legal research and youth engagement, Red Card Ambassador with ARDN advocating against gender-based violence, and President & Co-Founder of EDDEC where I led a 6,000-tree afforestation project in Goma.\n\nI'm an alumnus of Venice School of Human Rights Defenders (2025), Global Campus of Human Rights, Global Youth Climate Leadership Programme at University of Oxford, and International Anti-Corruption Academy in partnership with UNODC.\n\nSelected as a 2025 Youth Delegate for You(th) Rebuilding the Broken in Belgium (July 31\u2013Aug 3) and HISA Youth Fellowship in Oxford, UK (Aug 23\u201326).",
+      "focus_areas": [
+        "Human Rights Advocacy",
+        "Climate Action",
+        "Digital Privacy Rights",
+        "Gender Equality",
+        "Anti-Corruption",
+        "Legal Empowerment",
+        "Environmental Justice"
+      ],
+      "mission": "To advance justice, equity, and sustainability through human rights advocacy, legal empowerment, and youth engagement.",
+      "vision": "A world where human rights, environmental justice, and digital privacy are protected for all, with youth recognized as powerful agents of change."
+    }
+  },
+  {
+    "name": "Get Portfolio Leadership Data",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/portfolio/leadership",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "current_positions": [
+        {
+          "title": "Campaign Advocate",
+          "organization": "Amnesty International Kenya",
+          "period": "March 2025 \u2013 Present",
+          "description": "Supporting the Privacy First Campaign for digital rights and privacy protections",
+          "responsibilities": [
+            "Conducting research on privacy laws and violations",
+            "Organizing national workshops and policy dialogues on surveillance and youth safety online",
+            "Advocating for digital rights legislation"
+          ]
+        },
+        {
+          "title": "Managing Partner",
+          "organization": "Legal Alliance Associates",
+          "period": "2024 \u2013 Present",
+          "description": "Advancing SDG 4 through legal education",
+          "responsibilities": [
+            "Led Moot Court Training (2025) \u2013 trained 114+ students in courtroom advocacy",
+            "Developed public defense and legal literacy programs",
+            "Coordinated legal education initiatives across East Africa"
+          ]
+        },
+        {
+          "title": "Country Director (DRC)",
+          "organization": "The Lawrit Journal of Law",
+          "period": "August 2024 \u2013 Present",
+          "description": "Promoting legal research, governance, and climate change advocacy",
+          "responsibilities": [
+            "Reached over 280 law students in 2024",
+            "Co-organized the 2025 Leadership & Advocacy Bootcamp (400+ participants from 7 countries)",
+            "Bridging Francophone youth voices with pan-African legal innovation"
+          ]
+        },
+        {
+          "title": "Red Card Ambassador",
+          "organization": "African Renaissance and Diaspora Network (ARDN)",
+          "period": "January \u2013 June 2025",
+          "description": "Advocated against gender-based violence",
+          "responsibilities": [
+            "Organized virtual events and Red Card advocacy actions aligned with SDG 5",
+            "Panelist, Red Card Campaign on Gender-Based Violence (April 2025)",
+            "Managed digital outreach campaigns in support of gender equality"
+          ]
+        }
+      ],
+      "past_positions": [
+        {
+          "title": "Head of Indigenous Peoples Department",
+          "organization": "Les Toges Vertes",
+          "period": "July \u2013 December 2022",
+          "description": "Led legal aid and advocacy for indigenous communities",
+          "responsibilities": [
+            "Led legal aid for 150+ detainees",
+            "Advocated for Pygmy Protection Act (2015)",
+            "Supported IDPs through legal outreach",
+            "Conducted prison interviews, gathered testimonies, and drafted human rights reports"
+          ]
+        },
+        {
+          "title": "President & Co-Founder",
+          "organization": "EDDEC (Act for a Sustainable Development of the Environment in Congo)",
+          "period": "December 2019 \u2013 December 2021",
+          "description": "Led environmental sustainability and climate action programs",
+          "responsibilities": [
+            "Project Lead, 6,000-tree afforestation initiative in Goma (2019\u20132022)",
+            "Formed environmental partnerships with WWF, FFN, and the Provincial Ministry of Environment",
+            "Led school-based awareness campaigns impacting over 3,000 learners"
+          ]
+        },
+        {
+          "title": "Volunteer",
+          "organization": "North Kivu Women's Platform (PFNDE)",
+          "period": "February 2023 \u2013 August 2023",
+          "description": "Conducted surveys and led advocacy campaigns against gender-based violence",
+          "responsibilities": [
+            "Conducted surveys in 20 schools on sexual abuse and harassment",
+            "Co-led a campaign against gender-based violence during the 16 Days of Activism 2023"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Get Portfolio Achievements Data",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/portfolio/achievements",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "fellowships": [
+        {
+          "title": "Venice School for Human Rights Defenders",
+          "organization": "Global Campus of Human Rights",
+          "year": "2025",
+          "location": "Venice, Italy",
+          "distinction": "Youngest Participant Globally"
+        },
+        {
+          "title": "HISA Youth Fellowship",
+          "organization": "HISA",
+          "year": "2025",
+          "location": "Oxford, UK",
+          "distinction": "Youth Delegate",
+          "dates": "August 23-26, 2025"
+        },
+        {
+          "title": "You(th) Rebuilding the Broken",
+          "organization": "Youth Democratic Renewal",
+          "year": "2025",
+          "location": "Belgium",
+          "distinction": "Youth Delegate",
+          "dates": "July 31 \u2013 August 3, 2025"
+        },
+        {
+          "title": "Aspire Leadership Program",
+          "organization": "Harvard Business School & Aspire Institute",
+          "year": "2025",
+          "distinction": "Graduate"
+        },
+        {
+          "title": "Global Youth Climate Leadership Programme",
+          "organization": "University of Oxford",
+          "year": "2024",
+          "distinction": "Graduate"
+        },
+        {
+          "title": "International Anti-Corruption Autumn School",
+          "organization": "University of Oxford & UNODC",
+          "year": "2024",
+          "distinction": "42 Global Participants Selected"
+        },
+        {
+          "title": "EU Global Gateway Youth Event",
+          "organization": "European Union",
+          "year": "2024",
+          "location": "October 2024",
+          "distinction": "EU-Selected Delegate"
+        },
+        {
+          "title": "Fuel Africa 2024",
+          "organization": "Entrepreneurship Program",
+          "year": "2024",
+          "description": "Innovation in health and climate"
+        },
+        {
+          "title": "Africa Law Tech Festival 2024",
+          "organization": "Tech & Law Innovation",
+          "year": "2024",
+          "location": "Nairobi, Kenya",
+          "distinction": "Youth Delegate"
+        }
+      ],
+      "awards": [
+        {
+          "title": "Finalist & Best Memorial",
+          "organization": "JKUAT Tax Law Moot",
+          "year": "2025"
+        },
+        {
+          "title": "Best Male Oralist & Winner",
+          "organization": "2nd Mock Kenya ICJ Moot",
+          "year": "2024"
+        },
+        {
+          "title": "Best Diplomat",
+          "organization": "6th Kenya Intervarsity Diplomatic Conference",
+          "year": "2024"
+        },
+        {
+          "title": "Winner - Mock ICJ Moot on Climate Change",
+          "organization": "Kenya Model United Nations",
+          "year": "2024"
+        },
+        {
+          "title": "Best Upcoming Mooter",
+          "organization": "1st Kenya ICJ Moot, USIU-Kenya",
+          "year": "2024"
+        },
+        {
+          "title": "Best Male Orator",
+          "organization": "MKU Moot Court Competition",
+          "year": "2024"
+        },
+        {
+          "title": "Best Male Orator",
+          "organization": "6th Bachelor Moot Court, MKU",
+          "year": "2024"
+        },
+        {
+          "title": "Second Best Memorial",
+          "organization": "KeMUN Refugee Moot",
+          "year": "2024"
+        },
+        {
+          "title": "Winner - Ka Mana Prize",
+          "organization": "Ka Mana Foundation",
+          "year": "2023",
+          "description": "For argumentation and critical thinking"
+        },
+        {
+          "title": "Finalist",
+          "organization": "MKU 1st Debate Championship",
+          "year": "2023"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Get Portfolio Events Data",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/portfolio/events",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "upcoming_events": [
+        {
+          "title": "HISA Youth Fellowship",
+          "location": "Oxford, UK",
+          "date": "August 23-26, 2025",
+          "type": "Fellowship",
+          "description": "International youth leadership and policy development program"
+        },
+        {
+          "title": "You(th) Rebuilding the Broken Workshop",
+          "location": "Belgium",
+          "date": "July 31 - August 3, 2025",
+          "type": "Workshop",
+          "description": "Youth-led democratic renewal and governance workshop"
+        }
+      ],
+      "past_events": [
+        {
+          "title": "Venice School for Human Rights Defenders",
+          "location": "Venice, Italy",
+          "date": "2025",
+          "type": "Training",
+          "description": "Intensive human rights defenders training program - Youngest participant globally"
+        },
+        {
+          "title": "Privacy First Campaign Training",
+          "location": "Nairobi, Kenya",
+          "date": "March 2025",
+          "type": "Training",
+          "description": "Amnesty International Kenya's Privacy First Campaign Training"
+        },
+        {
+          "title": "EAC Secretary General Forum",
+          "location": "East Africa",
+          "date": "December 2024",
+          "type": "Forum",
+          "description": "Peace & Security Session Delegate"
+        },
+        {
+          "title": "Mock Trial on Women's Rights & SRHR",
+          "location": "JKUAT",
+          "date": "November 2024",
+          "type": "Participant",
+          "description": "Mock trial focused on women's rights and sexual reproductive health rights"
+        },
+        {
+          "title": "Africa Law Tech Festival 2024",
+          "location": "Nairobi, Kenya",
+          "date": "2024",
+          "type": "Conference",
+          "description": "Youth Delegate for tech and law innovation"
+        },
+        {
+          "title": "Human Rights Workshop",
+          "location": "UN Joint Office",
+          "date": "July 2023",
+          "type": "Training",
+          "description": "Comprehensive human rights training program"
+        },
+        {
+          "title": "Intervarsity Summit on SRHR",
+          "location": "DRC",
+          "date": "June 2023",
+          "type": "Summit",
+          "description": "Delegate for sexual reproductive health rights summit"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Get Portfolio Projects Data",
+    "url": "https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com/api/portfolio/projects",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "featured_projects": [
+        {
+          "title": "Moot Court Training Highlights",
+          "description": "Training 114+ law students in courtroom advocacy and legal literacy",
+          "link": "#",
+          "type": "Education"
+        },
+        {
+          "title": "Red Card Campaign | ARDN",
+          "description": "Campaign against gender-based violence",
+          "link": "#",
+          "type": "Advocacy"
+        },
+        {
+          "title": "EDDEC Climate Advocacy Video",
+          "description": "6,000-tree afforestation project documentation",
+          "link": "#",
+          "type": "Environment"
+        },
+        {
+          "title": "Lawrit Journal Initiatives",
+          "description": "Legal research and youth engagement platform",
+          "link": "#",
+          "type": "Research"
+        },
+        {
+          "title": "Les Toges Vertes",
+          "description": "Legal aid for indigenous communities",
+          "link": "#",
+          "type": "Human Rights"
+        }
+      ]
+    }
+  }
+]

@@ -18,10 +18,11 @@ class PortfolioAPITester:
         self.admin_token = None   # Will store admin JWT token
         self.uploaded_media_id = None  # Will store an uploaded media ID for testing
 
-    def run_test(self, name, method, endpoint, expected_status=200, data=None, params=None):
+    def run_test(self, name, method, endpoint, expected_status=200, data=None, params=None, headers=None, files=None):
         """Run a single API test"""
         url = f"{self.api_url}/{endpoint}"
-        headers = {'Content-Type': 'application/json'}
+        if not headers:
+            headers = {'Content-Type': 'application/json'}
         
         self.tests_run += 1
         print(f"\n🔍 Testing {name}...")
@@ -30,7 +31,15 @@ class PortfolioAPITester:
             if method == 'GET':
                 response = requests.get(url, headers=headers, params=params)
             elif method == 'POST':
-                response = requests.post(url, json=data, headers=headers, params=params)
+                if files:
+                    # For multipart/form-data requests (file uploads)
+                    response = requests.post(url, data=data, files=files, headers=headers, params=params)
+                else:
+                    response = requests.post(url, json=data, headers=headers, params=params)
+            elif method == 'PUT':
+                response = requests.put(url, json=data, headers=headers, params=params)
+            elif method == 'DELETE':
+                response = requests.delete(url, headers=headers, params=params)
             else:
                 raise ValueError(f"Unsupported method: {method}")
 

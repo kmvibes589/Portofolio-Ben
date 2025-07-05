@@ -585,8 +585,571 @@ const AboutSection = ({ aboutData, currentLang }) => {
   );
 };
 
-// Keep all other existing components (Leadership, Achievements, Events, Projects, Contact, Footer)
-// I'm keeping the same components to save space, just adding the blog functionality
+// Leadership Section Component
+const LeadershipSection = ({ leadershipData, currentLang }) => {
+  const sectionTitles = {
+    en: { leadership: "Leadership & Advocacy", current: "Current Positions", past: "Past Positions" },
+    fr: { leadership: "Leadership et Plaidoyer", current: "Postes actuels", past: "Postes précédents" },
+    ar: { leadership: "القيادة والدعوة", current: "المناصب الحالية", past: "المناصب السابقة" },
+    zh: { leadership: "领导力与倡导", current: "当前职位", past: "过往职位" },
+    es: { leadership: "Liderazgo y Defensa", current: "Posiciones Actuales", past: "Posiciones Pasadas" }
+  };
+
+  const titles = sectionTitles[currentLang] || sectionTitles.en;
+
+  return (
+    <section id="leadership" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{titles.leadership}</h2>
+          <div className="section-divider"></div>
+        </div>
+
+        {/* Current Positions */}
+        <div className="mb-12">
+          <h3 className="text-2xl font-bold text-gray-900 mb-8">{titles.current}</h3>
+          <div className="grid md:grid-cols-2 gap-8">
+            {leadershipData?.current_positions?.map((position, index) => (
+              <div key={index} className="leadership-card leadership-card-current p-6 rounded-lg shadow-md card-hover">
+                <h4 className="text-xl font-bold text-gray-900 mb-2">{position.title}</h4>
+                <p className="text-blue-600 font-semibold mb-2">{position.organization}</p>
+                <p className="text-gray-600 text-sm mb-3">{position.period}</p>
+                <p className="text-gray-700 mb-4">{position.description}</p>
+                <ul className="text-gray-600 text-sm space-y-1">
+                  {position.responsibilities?.map((resp, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <span className="text-blue-600 mr-2">•</span>
+                      {resp}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Past Positions */}
+        <div>
+          <h3 className="text-2xl font-bold text-gray-900 mb-8">{titles.past}</h3>
+          <div className="grid md:grid-cols-2 gap-8">
+            {leadershipData?.past_positions?.map((position, index) => (
+              <div key={index} className="leadership-card leadership-card-past p-6 rounded-lg shadow-md card-hover">
+                <h4 className="text-xl font-bold text-gray-900 mb-2">{position.title}</h4>
+                <p className="text-blue-600 font-semibold mb-2">{position.organization}</p>
+                <p className="text-gray-600 text-sm mb-3">{position.period}</p>
+                <p className="text-gray-700 mb-4">{position.description}</p>
+                <ul className="text-gray-600 text-sm space-y-1">
+                  {position.responsibilities?.map((resp, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <span className="text-blue-600 mr-2">•</span>
+                      {resp}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Achievements Section Component
+const AchievementsSection = ({ achievementsData, currentLang }) => {
+  const sectionTitles = {
+    en: { achievements: "Achievements & Recognition", fellowships: "🌍 International Fellowships", awards: "🏆 Awards & Recognition" },
+    fr: { achievements: "Réalisations et Reconnaissance", fellowships: "🌍 Bourses Internationales", awards: "🏆 Prix et Reconnaissance" },
+    ar: { achievements: "الإنجازات والاعتراف", fellowships: "🌍 الزمالات الدولية", awards: "🏆 الجوائز والاعتراف" },
+    zh: { achievements: "成就与认可", fellowships: "🌍 国际奖学金", awards: "🏆 奖项与认可" },
+    es: { achievements: "Logros y Reconocimiento", fellowships: "🌍 Becas Internacionales", awards: "🏆 Premios y Reconocimiento" }
+  };
+
+  const titles = sectionTitles[currentLang] || sectionTitles.en;
+
+  return (
+    <section id="achievements" className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{titles.achievements}</h2>
+          <div className="section-divider"></div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Fellowships */}
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">{titles.fellowships}</h3>
+            <div className="space-y-4">
+              {achievementsData?.fellowships?.map((fellowship, index) => (
+                <div key={index} className="achievement-card achievement-fellowship p-6 rounded-lg shadow-md card-hover">
+                  <h4 className="text-lg font-bold text-gray-900 mb-2">{fellowship.title}</h4>
+                  <p className="text-blue-600 font-semibold mb-1">{fellowship.organization}</p>
+                  <p className="text-gray-600 text-sm mb-2">
+                    {fellowship.year} {fellowship.location && `• ${fellowship.location}`}
+                    {fellowship.dates && ` • ${fellowship.dates}`}
+                  </p>
+                  {fellowship.distinction && (
+                    <span className="inline-block bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold">
+                      {fellowship.distinction}
+                    </span>
+                  )}
+                  {fellowship.description && (
+                    <p className="text-gray-600 text-sm mt-2">{fellowship.description}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Awards */}
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">{titles.awards}</h3>
+            <div className="space-y-4">
+              {achievementsData?.awards?.map((award, index) => (
+                <div key={index} className="achievement-card achievement-award p-6 rounded-lg shadow-md card-hover">
+                  <h4 className="text-lg font-bold text-gray-900 mb-2">{award.title}</h4>
+                  <p className="text-blue-600 font-semibold mb-1">{award.organization}</p>
+                  <p className="text-gray-600 text-sm">{award.year}</p>
+                  {award.description && (
+                    <p className="text-gray-600 text-sm mt-2">{award.description}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Events Section Component
+const EventsSection = ({ eventsData, currentLang }) => {
+  const sectionTitles = {
+    en: { events: "Events & Engagements", upcoming: "📅 Upcoming Events", past: "🎯 Past Events" },
+    fr: { events: "Événements et Engagements", upcoming: "📅 Événements à venir", past: "🎯 Événements passés" },
+    ar: { events: "الأحداث والمشاركات", upcoming: "📅 الأحداث القادمة", past: "🎯 الأحداث السابقة" },
+    zh: { events: "活动与参与", upcoming: "📅 即将到来的活动", past: "🎯 过往活动" },
+    es: { events: "Eventos y Compromisos", upcoming: "📅 Próximos Eventos", past: "🎯 Eventos Pasados" }
+  };
+
+  const titles = sectionTitles[currentLang] || sectionTitles.en;
+
+  return (
+    <section id="events" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{titles.events}</h2>
+          <div className="section-divider"></div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Upcoming Events */}
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">{titles.upcoming}</h3>
+            <div className="space-y-4">
+              {eventsData?.upcoming_events?.map((event, index) => (
+                <div key={index} className="event-card-upcoming p-6 rounded-lg shadow-md card-hover">
+                  <h4 className="text-lg font-bold text-gray-900 mb-2">{event.title}</h4>
+                  <p className="text-blue-600 font-semibold mb-1">{event.location}</p>
+                  <p className="text-gray-600 text-sm mb-3">{event.date} • {event.type}</p>
+                  <p className="text-gray-700">{event.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Past Events */}
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">{titles.past}</h3>
+            <div className="space-y-4">
+              {eventsData?.past_events?.map((event, index) => (
+                <div key={index} className="event-card-past p-6 rounded-lg shadow-md card-hover">
+                  <h4 className="text-lg font-bold text-gray-900 mb-2">{event.title}</h4>
+                  <p className="text-blue-600 font-semibold mb-1">{event.location}</p>
+                  <p className="text-gray-600 text-sm mb-3">{event.date} • {event.type}</p>
+                  <p className="text-gray-700">{event.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Projects Section Component
+const ProjectsSection = ({ projectsData, currentLang }) => {
+  const sectionTitles = {
+    en: { projects: "Featured Projects & Work", explore: "🔗 Explore My Work" },
+    fr: { projects: "Projets et Travaux en Vedette", explore: "🔗 Explorez mon travail" },
+    ar: { projects: "المشاريع والأعمال المميزة", explore: "🔗 استكشف عملي" },
+    zh: { projects: "特色项目与工作", explore: "🔗 探索我的工作" },
+    es: { projects: "Proyectos y Trabajos Destacados", explore: "🔗 Explora mi trabajo" }
+  };
+
+  const titles = sectionTitles[currentLang] || sectionTitles.en;
+
+  return (
+    <section id="projects" className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{titles.projects}</h2>
+          <div className="section-divider"></div>
+          <p className="text-gray-600 text-lg">{titles.explore}</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projectsData?.featured_projects?.map((project, index) => (
+            <div key={index} className="bg-white p-6 rounded-lg shadow-md card-hover">
+              <div className="flex items-center mb-4">
+                <span className="text-2xl mr-3">
+                  {project.type === 'Education' ? '📚' :
+                   project.type === 'Advocacy' ? '📢' :
+                   project.type === 'Environment' ? '🌱' :
+                   project.type === 'Research' ? '📊' :
+                   project.type === 'Human Rights' ? '⚖️' : '🔗'}
+                </span>
+                <span className="text-sm font-semibold text-blue-600 bg-blue-100 px-2 py-1 rounded">
+                  {project.type}
+                </span>
+              </div>
+              <h4 className="text-lg font-bold text-gray-900 mb-2">{project.title}</h4>
+              <p className="text-gray-600 mb-4">{project.description}</p>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold"
+              >
+                {currentLang === 'fr' ? 'Voir le projet' :
+                 currentLang === 'ar' ? 'عرض المشروع' :
+                 currentLang === 'zh' ? '查看项目' :
+                 currentLang === 'es' ? 'Ver proyecto' : 'View Project'}
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Contact Section Component
+const ContactSection = ({ currentLang }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    message_type: 'general'
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('');
+
+  const sectionTitles = {
+    en: {
+      contact: "Get in Touch",
+      subtitle: "Ready to collaborate, partner, or invite me to speak? Let's connect!",
+      collaborate: "Let's Collaborate",
+      areas: "Areas of Interest",
+      name: "Name",
+      email: "Email", 
+      subject: "Subject",
+      message: "Message",
+      messageType: "Message Type",
+      send: "Send Message",
+      sending: "Sending...",
+      success: "Message sent successfully! I'll get back to you soon.",
+      error: "Error sending message. Please try again.",
+      available: "Available via contact form",
+      based: "Based in Kenya",
+      speaking: "Available for speaking engagements",
+      open: "Open to partnerships and collaborations"
+    },
+    fr: {
+      contact: "Entrer en contact",
+      subtitle: "Prêt à collaborer, partenaire ou m'inviter à parler? Connectons-nous!",
+      collaborate: "Collaborons",
+      areas: "Domaines d'intérêt",
+      name: "Nom",
+      email: "E-mail",
+      subject: "Sujet", 
+      message: "Message",
+      messageType: "Type de message",
+      send: "Envoyer le message",
+      sending: "Envoi en cours...",
+      success: "Message envoyé avec succès! Je vous recontacterai bientôt.",
+      error: "Erreur lors de l'envoi du message. Veuillez réessayer.",
+      available: "Disponible via le formulaire de contact",
+      based: "Basé au Kenya",
+      speaking: "Disponible pour des engagements de prise de parole",
+      open: "Ouvert aux partenariats et collaborations"
+    }
+  };
+
+  const labels = sectionTitles[currentLang] || sectionTitles.en;
+
+  const messageTypes = {
+    en: {
+      general: "General Inquiry",
+      speaking: "Speaking Invitation", 
+      collaboration: "Collaboration",
+      media: "Media Interview",
+      mentorship: "Mentorship"
+    },
+    fr: {
+      general: "Demande générale",
+      speaking: "Invitation à parler",
+      collaboration: "Collaboration", 
+      media: "Interview média",
+      mentorship: "Mentorat"
+    }
+  };
+
+  const msgTypes = messageTypes[currentLang] || messageTypes.en;
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('');
+
+    try {
+      await axios.post(`${API}/contact`, formData);
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+        message_type: 'general'
+      });
+    } catch (error) {
+      setSubmitStatus('error');
+      console.error('Error sending message:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section id="contact" className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{labels.contact}</h2>
+          <div className="section-divider"></div>
+          <p className="text-gray-600 text-lg">
+            {labels.subtitle}
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <div>
+            <form onSubmit={handleSubmit} className="contact-form p-8 rounded-lg shadow-lg">
+              <div className="mb-6">
+                <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
+                  {labels.name} *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
+                  {labels.email} *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="message_type" className="block text-gray-700 text-sm font-bold mb-2">
+                  {labels.messageType}
+                </label>
+                <select
+                  id="message_type"
+                  name="message_type"
+                  value={formData.message_type}
+                  onChange={handleChange}
+                  className="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="general">{msgTypes.general}</option>
+                  <option value="speaking">{msgTypes.speaking}</option>
+                  <option value="collaboration">{msgTypes.collaboration}</option>
+                  <option value="media">{msgTypes.media}</option>
+                  <option value="mentorship">{msgTypes.mentorship}</option>
+                </select>
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="subject" className="block text-gray-700 text-sm font-bold mb-2">
+                  {labels.subject} *
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">
+                  {labels.message} *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows="5"
+                  className="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="form-button w-full text-white font-bold py-3 px-4 rounded-md transition duration-300 disabled:opacity-50"
+              >
+                {isSubmitting ? labels.sending : labels.send}
+              </button>
+
+              {submitStatus === 'success' && (
+                <div className="status-success mt-4 p-4 rounded">
+                  {labels.success}
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="status-error mt-4 p-4 rounded">
+                  {labels.error}
+                </div>
+              )}
+            </form>
+          </div>
+
+          {/* Contact Information */}
+          <div>
+            <div className="bg-white p-8 rounded-lg shadow-lg card-hover">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">{labels.collaborate}</h3>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center">
+                  <span className="text-blue-600 mr-4">📧</span>
+                  <span className="text-gray-700">{labels.available}</span>
+                </div>
+                
+                <div className="flex items-center">
+                  <span className="text-blue-600 mr-4">🌍</span>
+                  <span className="text-gray-700">{labels.based}</span>
+                </div>
+                
+                <div className="flex items-center">
+                  <span className="text-blue-600 mr-4">🎤</span>
+                  <span className="text-gray-700">{labels.speaking}</span>
+                </div>
+                
+                <div className="flex items-center">
+                  <span className="text-blue-600 mr-4">🤝</span>
+                  <span className="text-gray-700">{labels.open}</span>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-lg font-bold text-gray-900 mb-4">{labels.areas}</h4>
+                <div className="flex flex-wrap gap-2">
+                  <span className="tag">Human Rights</span>
+                  <span className="tag">Climate Action</span>
+                  <span className="tag">Digital Rights</span>
+                  <span className="tag">Youth Leadership</span>
+                  <span className="tag">Legal Education</span>
+                  <span className="tag">Gender Equality</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Footer Component
+const Footer = ({ currentLang }) => {
+  const footerLabels = {
+    en: { 
+      tagline: "Empowering Youth. Defending Rights. Inspiring Change.",
+      copyright: "© 2025 Benjamin Kyamoneka Mpey. All rights reserved.",
+      mission: "Thank you for exploring my portfolio. My mission is rooted in justice, equity, and sustainability. I'm open to collaborations in legal reform, youth empowerment, environmental justice, and human rights advocacy."
+    },
+    fr: {
+      tagline: "Autonomiser la Jeunesse. Défendre les Droits. Inspirer le Changement.",
+      copyright: "© 2025 Benjamin Kyamoneka Mpey. Tous droits réservés.",
+      mission: "Merci d'avoir exploré mon portfolio. Ma mission est enracinée dans la justice, l'équité et la durabilité. Je suis ouvert aux collaborations en réforme juridique, autonomisation des jeunes, justice environnementale et défense des droits humains."
+    }
+  };
+
+  const labels = footerLabels[currentLang] || footerLabels.en;
+
+  return (
+    <footer className="bg-gray-900 text-white py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <h3 className="text-2xl font-bold mb-4">Benjamin Kyamoneka Mpey</h3>
+          <p className="text-gray-300 mb-6">{labels.tagline}</p>
+          <p className="text-gray-400 max-w-3xl mx-auto mb-8">{labels.mission}</p>
+          
+          <div className="flex justify-center space-x-6 mb-8">
+            <a href="https://linkedin.com/in/kyamoneka-mpey-benjamin" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition duration-300">
+              LinkedIn
+            </a>
+            <a href="mailto:kyamompey@gmail.com" className="text-gray-300 hover:text-white transition duration-300">
+              Email
+            </a>
+            <a href="tel:+254797427649" className="text-gray-300 hover:text-white transition duration-300">
+              Phone
+            </a>
+          </div>
+          
+          <div className="mt-8 pt-8 border-t border-gray-700">
+            <p className="text-gray-400 text-sm">{labels.copyright}</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
 // Main App Component with routing
 function App() {

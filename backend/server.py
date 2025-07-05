@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Query
 from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional, Dict, Any
 import uuid
 from datetime import datetime
+import re
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -52,12 +53,32 @@ class BlogPost(BaseModel):
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     published: bool = True
     tags: List[str] = []
+    category: str = "general"
+    featured_image: Optional[str] = None
+    reading_time: Optional[int] = None
+    paper_type: Optional[str] = None  # academic, article, research, opinion
+    academic_info: Optional[Dict[str, Any]] = None  # for academic papers
 
 class BlogPostCreate(BaseModel):
     title: str
     content: str
     excerpt: str
     tags: List[str] = []
+    category: str = "general"
+    featured_image: Optional[str] = None
+    paper_type: Optional[str] = None
+    academic_info: Optional[Dict[str, Any]] = None
+
+class BlogPostUpdate(BaseModel):
+    title: Optional[str] = None
+    content: Optional[str] = None
+    excerpt: Optional[str] = None
+    tags: Optional[List[str]] = None
+    category: Optional[str] = None
+    featured_image: Optional[str] = None
+    published: Optional[bool] = None
+    paper_type: Optional[str] = None
+    academic_info: Optional[Dict[str, Any]] = None
 
 class NewsletterSubscription(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -78,6 +99,12 @@ LANGUAGES = {
     "zh": "中文",
     "es": "Español"
 }
+
+# Utility function to calculate reading time
+def calculate_reading_time(content: str) -> int:
+    """Calculate estimated reading time in minutes based on average reading speed of 200 words per minute"""
+    word_count = len(re.findall(r'\w+', content))
+    return max(1, round(word_count / 200))
 
 # Portfolio data endpoints
 @api_router.get("/")
@@ -563,6 +590,100 @@ async def get_projects(lang: str = "en"):
         ]
     }
 
+# Blog endpoints with enhanced functionality
+@api_router.post("/blog", response_model=BlogPost)
+async def create_blog_post(input: BlogPostCreate):
+    blog_dict = input.dict()
+    blog_obj = BlogPost(**blog_dict)
+    
+    # Calculate reading time
+    blog_obj.reading_time = calculate_reading_time(blog_obj.content)
+    
+    await db.blog_posts.insert_one(blog_obj.dict())
+    return blog_obj
+
+@api_router.get("/blog", response_model=List[BlogPost])
+async def get_blog_posts(
+    category: Optional[str] = None,
+    tag: Optional[str] = None,
+    search: Optional[str] = None,
+    limit: int = Query(default=10, le=50),
+    skip: int = Query(default=0, ge=0)
+):
+    # Build query based on filters
+    query = {"published": True}
+    
+    if category:
+        query["category"] = category
+    
+    if tag:
+        query["tags"] = {"$in": [tag]}
+    
+    if search:
+        query["$or"] = [
+            {"title": {"$regex": search, "$options": "i"}},
+            {"content": {"$regex": search, "$options": "i"}},
+            {"excerpt": {"$regex": search, "$options": "i"}}
+        ]
+    
+    posts = await db.blog_posts.find(query).sort("created_at", -1).skip(skip).limit(limit).to_list(limit)
+    return [BlogPost(**post) for post in posts]
+
+@api_router.get("/blog/categories")
+async def get_blog_categories():
+    """Get all available blog categories"""
+    categories = await db.blog_posts.distinct("category", {"published": True})
+    return categories
+
+@api_router.get("/blog/tags")
+async def get_blog_tags():
+    """Get all available blog tags"""
+    # Get all posts and extract unique tags
+    posts = await db.blog_posts.find({"published": True}, {"tags": 1}).to_list(1000)
+    all_tags = []
+    for post in posts:
+        all_tags.extend(post.get("tags", []))
+    unique_tags = list(set(all_tags))
+    return unique_tags
+
+@api_router.get("/blog/featured")
+async def get_featured_posts(limit: int = 3):
+    """Get featured blog posts (most recent)"""
+    posts = await db.blog_posts.find({"published": True}).sort("created_at", -1).limit(limit).to_list(limit)
+    return [BlogPost(**post) for post in posts]
+
+@api_router.get("/blog/{post_id}", response_model=BlogPost)
+async def get_blog_post(post_id: str):
+    post = await db.blog_posts.find_one({"id": post_id, "published": True})
+    if not post:
+        raise HTTPException(status_code=404, detail="Blog post not found")
+    return BlogPost(**post)
+
+@api_router.put("/blog/{post_id}", response_model=BlogPost)
+async def update_blog_post(post_id: str, input: BlogPostUpdate):
+    post = await db.blog_posts.find_one({"id": post_id})
+    if not post:
+        raise HTTPException(status_code=404, detail="Blog post not found")
+    
+    update_data = {k: v for k, v in input.dict().items() if v is not None}
+    update_data["updated_at"] = datetime.utcnow()
+    
+    # Recalculate reading time if content is updated
+    if "content" in update_data:
+        update_data["reading_time"] = calculate_reading_time(update_data["content"])
+    
+    await db.blog_posts.update_one({"id": post_id}, {"$set": update_data})
+    
+    updated_post = await db.blog_posts.find_one({"id": post_id})
+    return BlogPost(**updated_post)
+
+@api_router.delete("/blog/{post_id}")
+async def delete_blog_post(post_id: str):
+    result = await db.blog_posts.delete_one({"id": post_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Blog post not found")
+    return {"message": "Blog post deleted successfully"}
+
 # Contact endpoints
 @api_router.post("/contact", response_model=ContactMessage)
 async def create_contact_message(input: ContactMessageCreate):
@@ -575,26 +696,6 @@ async def create_contact_message(input: ContactMessageCreate):
 async def get_contact_messages():
     messages = await db.contact_messages.find().sort("timestamp", -1).to_list(100)
     return [ContactMessage(**message) for message in messages]
-
-# Blog endpoints
-@api_router.post("/blog", response_model=BlogPost)
-async def create_blog_post(input: BlogPostCreate):
-    blog_dict = input.dict()
-    blog_obj = BlogPost(**blog_dict)
-    await db.blog_posts.insert_one(blog_obj.dict())
-    return blog_obj
-
-@api_router.get("/blog", response_model=List[BlogPost])
-async def get_blog_posts():
-    posts = await db.blog_posts.find({"published": True}).sort("created_at", -1).to_list(50)
-    return [BlogPost(**post) for post in posts]
-
-@api_router.get("/blog/{post_id}", response_model=BlogPost)
-async def get_blog_post(post_id: str):
-    post = await db.blog_posts.find_one({"id": post_id, "published": True})
-    if not post:
-        raise HTTPException(status_code=404, detail="Blog post not found")
-    return BlogPost(**post)
 
 # Newsletter endpoints
 @api_router.post("/newsletter/subscribe", response_model=NewsletterSubscription)

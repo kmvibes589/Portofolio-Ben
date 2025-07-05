@@ -162,8 +162,8 @@ backend:
     needs_retesting: true
     status_history:
       - working: true
-        agent: "main"
-        comment: "Static file serving for uploaded media via /uploads endpoint"
+        agent: "testing"
+        comment: "Static file serving for uploaded media via /uploads endpoint tested successfully. Uploaded files are accessible through their file paths."
 
 frontend:
   - task: "Admin Panel UI"

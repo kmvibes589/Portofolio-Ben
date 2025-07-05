@@ -114,8 +114,8 @@ backend:
     needs_retesting: true
     status_history:
       - working: true
-        agent: "main"
-        comment: "JWT-based admin authentication with login/verify endpoints implemented"
+        agent: "testing"
+        comment: "JWT-based admin authentication with login/verify endpoints tested successfully. Login with correct credentials returns a valid token, and verify endpoint correctly validates the token. Invalid token authentication is properly rejected."
 
   - task: "Media Upload API Endpoints"
     implemented: true

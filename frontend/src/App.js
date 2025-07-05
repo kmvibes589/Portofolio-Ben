@@ -547,8 +547,15 @@ const AboutSection = ({ aboutData, currentLang }) => {
   const titles = sectionTitles[currentLang] || sectionTitles.en;
 
   return (
-    <section id="about" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-20 bg-gray-50 relative">
+      <div className="absolute inset-0 opacity-5">
+        <img 
+          src="https://images.unsplash.com/photo-1742728905754-6316f35fe9e0" 
+          alt="Human Rights Advocacy"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{titles.about}</h2>
           <div className="section-divider"></div>

@@ -461,51 +461,72 @@ const BlogPost = () => {
 const HeroSection = ({ aboutData, currentLang }) => {
   return (
     <section id="home" className="relative bg-gradient-to-r from-blue-900 to-purple-900 text-white min-h-screen flex items-center hero-gradient">
-      <div className="absolute inset-0 bg-black opacity-50 hero-overlay"></div>
+      <div className="absolute inset-0">
+        <img 
+          src="https://images.pexels.com/photos/8349230/pexels-photo-8349230.jpeg" 
+          alt="Professional conference speaking"
+          className="w-full h-full object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+      </div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fadeInUp">
-            {aboutData?.name || "Benjamin Kyamoneka Mpey"}
-          </h1>
-          <p className="text-xl md:text-2xl mb-4 text-blue-200 animate-slideInLeft">
-            {aboutData?.title || "Human Rights Defender | Privacy First Campaigner"}
-          </p>
-          <p className="text-lg md:text-xl mb-8 text-blue-200 animate-slideInRight">
-            {aboutData?.tagline || "Empowering Youth. Defending Rights. Inspiring Change."}
-          </p>
-          
-          {/* Contact Info */}
-          <div className="flex flex-col md:flex-row gap-4 justify-center mb-8 text-sm md:text-base">
-            <div className="flex items-center justify-center space-x-2">
-              <span>📞</span>
-              <span>{aboutData?.phone || "+254 797 427 649"}</span>
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fadeInUp">
+              {aboutData?.name || "Benjamin Kyamoneka Mpey"}
+            </h1>
+            <p className="text-xl md:text-2xl mb-4 text-blue-200 animate-slideInLeft">
+              {aboutData?.title || "Human Rights Defender | Privacy First Campaigner"}
+            </p>
+            <p className="text-lg md:text-xl mb-8 text-blue-200 animate-slideInRight">
+              {aboutData?.tagline || "Empowering Youth. Defending Rights. Inspiring Change."}
+            </p>
+            
+            {/* Contact Info */}
+            <div className="flex flex-col gap-3 mb-8 text-sm md:text-base">
+              <div className="flex items-center space-x-3">
+                <span>📞</span>
+                <span>{aboutData?.phone || "+254 797 427 649"}</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span>📧</span>
+                <span>{aboutData?.email || "kyamompey@gmail.com"}</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span>🔗</span>
+                <a href="https://www.linkedin.com/in/kyamoneka-mpey-benjamin-177967298" 
+                   target="_blank" rel="noopener noreferrer" className="hover:text-blue-300 transition-colors">
+                  LinkedIn Profile
+                </a>
+              </div>
             </div>
-            <div className="flex items-center justify-center space-x-2">
-              <span>📧</span>
-              <span>{aboutData?.email || "kyamompey@gmail.com"}</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2">
-              <span>🔗</span>
-              <a href={`https://linkedin.com/in/${aboutData?.linkedin || 'kyamoneka-mpey-benjamin'}`} 
-                 target="_blank" rel="noopener noreferrer" className="hover:text-blue-300">
-                LinkedIn Profile
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a href="#about" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition duration-300 form-button">
+                {currentLang === 'fr' ? 'En savoir plus' : 
+                 currentLang === 'ar' ? 'اعرف أكثر' :
+                 currentLang === 'zh' ? '了解更多' :
+                 currentLang === 'es' ? 'Saber más' : 'Learn More'}
               </a>
+              <Link to="/blog" className="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-8 py-3 rounded-lg text-lg font-semibold transition duration-300">
+                {currentLang === 'fr' ? 'Lire mes articles' :
+                 currentLang === 'ar' ? 'اقرأ مقالاتي' :
+                 currentLang === 'zh' ? '阅读我的文章' :
+                 currentLang === 'es' ? 'Leer mis artículos' : 'Read My Articles'}
+              </Link>
             </div>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#about" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition duration-300 form-button">
-              {currentLang === 'fr' ? 'En savoir plus' : 
-               currentLang === 'ar' ? 'اعرف أكثر' :
-               currentLang === 'zh' ? '了解更多' :
-               currentLang === 'es' ? 'Saber más' : 'Learn More'}
-            </a>
-            <Link to="/blog" className="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-8 py-3 rounded-lg text-lg font-semibold transition duration-300">
-              {currentLang === 'fr' ? 'Lire mes articles' :
-               currentLang === 'ar' ? 'اقرأ مقالاتي' :
-               currentLang === 'zh' ? '阅读我的文章' :
-               currentLang === 'es' ? 'Leer mis artículos' : 'Read My Articles'}
-            </Link>
+          {/* Professional Photo */}
+          <div className="flex justify-center">
+            <div className="relative">
+              <img 
+                src="https://images.pexels.com/photos/32810456/pexels-photo-32810456.jpeg" 
+                alt="Benjamin Kyamoneka Mpey"
+                className="w-80 h-80 object-cover rounded-full border-4 border-white shadow-2xl"
+              />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-t from-blue-900/30 to-transparent"></div>
+            </div>
           </div>
         </div>
       </div>

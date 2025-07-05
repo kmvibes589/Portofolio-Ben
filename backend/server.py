@@ -1,5 +1,7 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Query
+from fastapi import FastAPI, APIRouter, HTTPException, Query, Depends, File, UploadFile, Form
 from fastapi.responses import FileResponse
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -9,11 +11,23 @@ from pathlib import Path
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional, Dict, Any
 import uuid
-from datetime import datetime
-import re
+from datetime import datetime, timedelta
+import hashlib
+import jwt
+import aiofiles
+import shutil
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
+
+# Create uploads directory
+UPLOAD_DIR = ROOT_DIR / "uploads"
+UPLOAD_DIR.mkdir(exist_ok=True)
+
+# Create subdirectories for different media types
+(UPLOAD_DIR / "images").mkdir(exist_ok=True)
+(UPLOAD_DIR / "videos").mkdir(exist_ok=True)
+(UPLOAD_DIR / "portfolio").mkdir(exist_ok=True)
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
@@ -23,10 +37,50 @@ db = client[os.environ['DB_NAME']]
 # Create the main app without a prefix
 app = FastAPI(title="Benjamin Kyamoneka Mpey Portfolio API")
 
+# Mount static files for serving uploads
+app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
+
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
+# Security setup
+security = HTTPBearer()
+SECRET_KEY = "benjamin_portfolio_secret_key_2025"  # In production, use environment variable
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24  # 24 hours
+
+# Admin credentials (in production, store hashed in database)
+ADMIN_USERNAME = "benjamin_admin"
+ADMIN_PASSWORD = "KyamonekaBenjamin2025!"  # Change this password!
+
 # Pydantic Models
+class AdminLogin(BaseModel):
+    username: str
+    password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    expires_in: int
+
+class MediaFile(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    filename: str
+    original_filename: str
+    file_path: str
+    file_type: str  # image, video
+    mime_type: str
+    file_size: int
+    upload_date: datetime = Field(default_factory=datetime.utcnow)
+    category: str = "general"  # profile, hero, background, blog, video
+    description: Optional[str] = None
+    is_active: bool = True
+
+class MediaFileUpdate(BaseModel):
+    category: Optional[str] = None
+    description: Optional[str] = None
+    is_active: Optional[bool] = None
+
 class ContactMessage(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
@@ -55,9 +109,10 @@ class BlogPost(BaseModel):
     tags: List[str] = []
     category: str = "general"
     featured_image: Optional[str] = None
+    featured_video: Optional[str] = None
     reading_time: Optional[int] = None
-    paper_type: Optional[str] = None  # academic, article, research, opinion
-    academic_info: Optional[Dict[str, Any]] = None  # for academic papers
+    paper_type: Optional[str] = None
+    academic_info: Optional[Dict[str, Any]] = None
 
 class BlogPostCreate(BaseModel):
     title: str
@@ -66,6 +121,7 @@ class BlogPostCreate(BaseModel):
     tags: List[str] = []
     category: str = "general"
     featured_image: Optional[str] = None
+    featured_video: Optional[str] = None
     paper_type: Optional[str] = None
     academic_info: Optional[Dict[str, Any]] = None
 
@@ -76,6 +132,7 @@ class BlogPostUpdate(BaseModel):
     tags: Optional[List[str]] = None
     category: Optional[str] = None
     featured_image: Optional[str] = None
+    featured_video: Optional[str] = None
     published: Optional[bool] = None
     paper_type: Optional[str] = None
     academic_info: Optional[Dict[str, Any]] = None
@@ -100,11 +157,162 @@ LANGUAGES = {
     "es": "Español"
 }
 
+# Authentication functions
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
+    to_encode = data.copy()
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(minutes=15)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+def verify_token(token: str):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            return None
+        return username
+    except jwt.PyJWTError:
+        return None
+
+async def get_current_admin(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    username = verify_token(credentials.credentials)
+    if username != ADMIN_USERNAME:
+        raise HTTPException(status_code=401, detail="Invalid authentication credentials")
+    return username
+
 # Utility function to calculate reading time
 def calculate_reading_time(content: str) -> int:
-    """Calculate estimated reading time in minutes based on average reading speed of 200 words per minute"""
+    import re
     word_count = len(re.findall(r'\w+', content))
     return max(1, round(word_count / 200))
+
+# Admin Authentication Endpoints
+@api_router.post("/admin/login", response_model=Token)
+async def admin_login(login_data: AdminLogin):
+    if login_data.username == ADMIN_USERNAME and login_data.password == ADMIN_PASSWORD:
+        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        access_token = create_access_token(
+            data={"sub": login_data.username}, expires_delta=access_token_expires
+        )
+        return {
+            "access_token": access_token,
+            "token_type": "bearer",
+            "expires_in": ACCESS_TOKEN_EXPIRE_MINUTES * 60
+        }
+    else:
+        raise HTTPException(status_code=401, detail="Incorrect username or password")
+
+@api_router.get("/admin/verify")
+async def verify_admin(current_admin: str = Depends(get_current_admin)):
+    return {"message": "Admin authenticated", "username": current_admin}
+
+# Media Management Endpoints
+@api_router.post("/admin/media/upload")
+async def upload_media(
+    file: UploadFile = File(...),
+    category: str = Form("general"),
+    description: str = Form(""),
+    current_admin: str = Depends(get_current_admin)
+):
+    # Validate file type
+    allowed_image_types = ["image/jpeg", "image/png", "image/gif", "image/webp"]
+    allowed_video_types = ["video/mp4", "video/mpeg", "video/quicktime", "video/x-msvideo"]
+    
+    if file.content_type not in allowed_image_types + allowed_video_types:
+        raise HTTPException(status_code=400, detail="Unsupported file type")
+    
+    # Determine file type and directory
+    if file.content_type in allowed_image_types:
+        file_type = "image"
+        upload_subdir = "images"
+    else:
+        file_type = "video"
+        upload_subdir = "videos"
+    
+    # Generate unique filename
+    file_extension = file.filename.split('.')[-1] if '.' in file.filename else ''
+    unique_filename = f"{uuid.uuid4()}.{file_extension}"
+    file_path = UPLOAD_DIR / upload_subdir / unique_filename
+    
+    # Save file
+    try:
+        async with aiofiles.open(file_path, 'wb') as f:
+            content = await file.read()
+            await f.write(content)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to save file: {str(e)}")
+    
+    # Create media record
+    media_file = MediaFile(
+        filename=unique_filename,
+        original_filename=file.filename,
+        file_path=f"/uploads/{upload_subdir}/{unique_filename}",
+        file_type=file_type,
+        mime_type=file.content_type,
+        file_size=len(content),
+        category=category,
+        description=description if description else None
+    )
+    
+    # Save to database
+    await db.media_files.insert_one(media_file.dict())
+    
+    return media_file
+
+@api_router.get("/admin/media", response_model=List[MediaFile])
+async def get_media_files(
+    file_type: Optional[str] = None,
+    category: Optional[str] = None,
+    current_admin: str = Depends(get_current_admin)
+):
+    query = {"is_active": True}
+    if file_type:
+        query["file_type"] = file_type
+    if category:
+        query["category"] = category
+    
+    files = await db.media_files.find(query).sort("upload_date", -1).to_list(100)
+    return [MediaFile(**file) for file in files]
+
+@api_router.put("/admin/media/{file_id}")
+async def update_media_file(
+    file_id: str,
+    update_data: MediaFileUpdate,
+    current_admin: str = Depends(get_current_admin)
+):
+    file_doc = await db.media_files.find_one({"id": file_id})
+    if not file_doc:
+        raise HTTPException(status_code=404, detail="Media file not found")
+    
+    update_dict = {k: v for k, v in update_data.dict().items() if v is not None}
+    if update_dict:
+        await db.media_files.update_one({"id": file_id}, {"$set": update_dict})
+    
+    updated_file = await db.media_files.find_one({"id": file_id})
+    return MediaFile(**updated_file)
+
+@api_router.delete("/admin/media/{file_id}")
+async def delete_media_file(
+    file_id: str,
+    current_admin: str = Depends(get_current_admin)
+):
+    file_doc = await db.media_files.find_one({"id": file_id})
+    if not file_doc:
+        raise HTTPException(status_code=404, detail="Media file not found")
+    
+    # Delete physical file
+    file_path = Path(str(UPLOAD_DIR)) / file_doc["file_path"].replace("/uploads/", "")
+    if file_path.exists():
+        file_path.unlink()
+    
+    # Delete from database
+    await db.media_files.delete_one({"id": file_id})
+    
+    return {"message": "Media file deleted successfully"}
 
 # Portfolio data endpoints
 @api_router.get("/")
@@ -591,8 +799,8 @@ async def get_projects(lang: str = "en"):
     }
 
 # Blog endpoints with enhanced functionality
-@api_router.post("/blog", response_model=BlogPost)
-async def create_blog_post(input: BlogPostCreate):
+@api_router.post("/admin/blog", response_model=BlogPost)
+async def create_blog_post(input: BlogPostCreate, current_admin: str = Depends(get_current_admin)):
     blog_dict = input.dict()
     blog_obj = BlogPost(**blog_dict)
     
@@ -629,6 +837,11 @@ async def get_blog_posts(
     posts = await db.blog_posts.find(query).sort("created_at", -1).skip(skip).limit(limit).to_list(limit)
     return [BlogPost(**post) for post in posts]
 
+@api_router.get("/admin/blog", response_model=List[BlogPost])
+async def get_all_blog_posts(current_admin: str = Depends(get_current_admin)):
+    posts = await db.blog_posts.find().sort("created_at", -1).to_list(100)
+    return [BlogPost(**post) for post in posts]
+
 @api_router.get("/blog/categories")
 async def get_blog_categories():
     """Get all available blog categories"""
@@ -659,8 +872,8 @@ async def get_blog_post(post_id: str):
         raise HTTPException(status_code=404, detail="Blog post not found")
     return BlogPost(**post)
 
-@api_router.put("/blog/{post_id}", response_model=BlogPost)
-async def update_blog_post(post_id: str, input: BlogPostUpdate):
+@api_router.put("/admin/blog/{post_id}", response_model=BlogPost)
+async def update_blog_post(post_id: str, input: BlogPostUpdate, current_admin: str = Depends(get_current_admin)):
     post = await db.blog_posts.find_one({"id": post_id})
     if not post:
         raise HTTPException(status_code=404, detail="Blog post not found")
@@ -677,8 +890,8 @@ async def update_blog_post(post_id: str, input: BlogPostUpdate):
     updated_post = await db.blog_posts.find_one({"id": post_id})
     return BlogPost(**updated_post)
 
-@api_router.delete("/blog/{post_id}")
-async def delete_blog_post(post_id: str):
+@api_router.delete("/admin/blog/{post_id}")
+async def delete_blog_post(post_id: str, current_admin: str = Depends(get_current_admin)):
     result = await db.blog_posts.delete_one({"id": post_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Blog post not found")
@@ -692,8 +905,8 @@ async def create_contact_message(input: ContactMessageCreate):
     await db.contact_messages.insert_one(contact_obj.dict())
     return contact_obj
 
-@api_router.get("/contact", response_model=List[ContactMessage])
-async def get_contact_messages():
+@api_router.get("/admin/contact", response_model=List[ContactMessage])
+async def get_contact_messages(current_admin: str = Depends(get_current_admin)):
     messages = await db.contact_messages.find().sort("timestamp", -1).to_list(100)
     return [ContactMessage(**message) for message in messages]
 
@@ -709,6 +922,11 @@ async def subscribe_newsletter(input: NewsletterSubscriptionCreate):
     subscription_obj = NewsletterSubscription(**subscription_dict)
     await db.newsletter_subscriptions.insert_one(subscription_obj.dict())
     return subscription_obj
+
+@api_router.get("/admin/newsletter", response_model=List[NewsletterSubscription])
+async def get_newsletter_subscriptions(current_admin: str = Depends(get_current_admin)):
+    subscriptions = await db.newsletter_subscriptions.find().sort("subscribed_at", -1).to_list(100)
+    return [NewsletterSubscription(**sub) for sub in subscriptions]
 
 # Include the router in the main app
 app.include_router(api_router)

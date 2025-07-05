@@ -138,8 +138,8 @@ backend:
     needs_retesting: true
     status_history:
       - working: true
-        agent: "main"
-        comment: "CRUD operations for media files with filtering and metadata support"
+        agent: "testing"
+        comment: "CRUD operations for media files with filtering and metadata support tested successfully. GET, PUT, and DELETE operations work as expected, and filtering by file type and category functions correctly."
 
   - task: "Blog Management API"
     implemented: true

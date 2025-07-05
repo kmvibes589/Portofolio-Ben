@@ -1699,13 +1699,13 @@
     "expected_status": 200,
     "success": true,
     "response": {
-      "id": "68747d0d-24f3-437f-b976-1781fe132f60",
+      "id": "36a7b6a6-0d6b-4d19-8105-780a3c725707",
       "name": "Test User",
       "email": "test@example.com",
       "subject": "API Test",
       "message": "This is a test message from the API test suite.",
       "message_type": "general",
-      "timestamp": "2025-07-05T07:23:01.310118"
+      "timestamp": "2025-07-05T08:04:17.460875"
     }
   },
   {
@@ -1716,13 +1716,13 @@
     "expected_status": 200,
     "success": true,
     "response": {
-      "id": "2faadccc-1b6d-4543-a041-99561f71ceb9",
+      "id": "1b63eeb0-3549-47b9-8a00-a87c2fc7929f",
       "name": "Test User - general",
       "email": "test_general@example.com",
       "subject": "API Test - general",
       "message": "This is a test message for general inquiry.",
       "message_type": "general",
-      "timestamp": "2025-07-05T07:23:01.335363"
+      "timestamp": "2025-07-05T08:04:17.526658"
     }
   },
   {
@@ -1733,13 +1733,13 @@
     "expected_status": 200,
     "success": true,
     "response": {
-      "id": "0f2513ad-355d-436d-bbe0-1bf5f7df5433",
+      "id": "40edf9a1-99d5-49a5-bbb3-f90981f0cb28",
       "name": "Test User - speaking",
       "email": "test_speaking@example.com",
       "subject": "API Test - speaking",
       "message": "This is a test message for speaking inquiry.",
       "message_type": "speaking",
-      "timestamp": "2025-07-05T07:23:01.366312"
+      "timestamp": "2025-07-05T08:04:17.544495"
     }
   },
   {
@@ -1750,13 +1750,13 @@
     "expected_status": 200,
     "success": true,
     "response": {
-      "id": "4f470e51-6ba0-4c93-a64b-87ab1318f3f6",
+      "id": "afb35165-1354-4d7f-8737-d9895c95b88e",
       "name": "Test User - collaboration",
       "email": "test_collaboration@example.com",
       "subject": "API Test - collaboration",
       "message": "This is a test message for collaboration inquiry.",
       "message_type": "collaboration",
-      "timestamp": "2025-07-05T07:23:01.388089"
+      "timestamp": "2025-07-05T08:04:17.608384"
     }
   },
   {
@@ -1767,13 +1767,13 @@
     "expected_status": 200,
     "success": true,
     "response": {
-      "id": "597d4a53-2c93-434d-8726-e8b05c4304f6",
+      "id": "3efd48d2-706b-48d6-b7f4-a0b7f283020b",
       "name": "Test User - media",
       "email": "test_media@example.com",
       "subject": "API Test - media",
       "message": "This is a test message for media inquiry.",
       "message_type": "media",
-      "timestamp": "2025-07-05T07:23:01.408045"
+      "timestamp": "2025-07-05T08:04:17.647451"
     }
   },
   {
@@ -1784,13 +1784,451 @@
     "expected_status": 200,
     "success": true,
     "response": {
-      "id": "2a52ce7c-d6b2-487f-a2ea-958a4b7eb18a",
+      "id": "618948b4-cf33-4842-9b18-80b11e8d6926",
       "name": "Test User - mentorship",
       "email": "test_mentorship@example.com",
       "subject": "API Test - mentorship",
       "message": "This is a test message for mentorship inquiry.",
       "message_type": "mentorship",
-      "timestamp": "2025-07-05T07:23:01.427819"
+      "timestamp": "2025-07-05T08:04:17.682432"
     }
+  },
+  {
+    "name": "Create Blog Post",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/blog",
+    "method": "POST",
+    "status_code": 200,
+    "expected_status": 201,
+    "success": false,
+    "error": "{\"id\":\"7adc4fa7-1c21-4f22-ba30-44eb1bedd685\",\"title\":\"Test Academic Paper\",\"content\":\"This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. \",\"excerpt\":\"A brief overview of the test academic paper and its findings.\",\"author\":\"Benjamin Kyamoneka Mpey\",\"created_at\":\"2025-07-05T08:04:17.744962\",\"updated_at\":\"2025-07-05T08:04:17.744964\",\"published\":true,\"tags\":[\"Law & Policy\",\"Climate Law\",\"Test\"],\"category\":\"Law & Policy\",\"featured_image\":null,\"reading_time\":2,\"paper_type\":\"academic\",\"academic_info\":{\"institution\":\"Test University\",\"field\":\"International Law\",\"type\":\"Research Paper\"}}"
+  },
+  {
+    "name": "Get Blog Posts",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/blog",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": [
+      {
+        "id": "7adc4fa7-1c21-4f22-ba30-44eb1bedd685",
+        "title": "Test Academic Paper",
+        "content": "This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. ",
+        "excerpt": "A brief overview of the test academic paper and its findings.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T08:04:17.744000",
+        "updated_at": "2025-07-05T08:04:17.744000",
+        "published": true,
+        "tags": [
+          "Law & Policy",
+          "Climate Law",
+          "Test"
+        ],
+        "category": "Law & Policy",
+        "featured_image": null,
+        "reading_time": 2,
+        "paper_type": "academic",
+        "academic_info": {
+          "institution": "Test University",
+          "field": "International Law",
+          "type": "Research Paper"
+        }
+      },
+      {
+        "id": "10c90c6f-1289-478a-b11a-6dfe619c9b3d",
+        "title": "From Streets to Screens: How Kenyan Gen Z Protests Against the Finance Bill Sparked a Pan-African Youth Movement",
+        "content": "Introduction\nImagine a generation born into a world of digital connectivity, yet disconnected from the opportunities it promised. In June 2023, Kenya's Gen Z young, restless, and relentless, took to the streets to defy a government that sought to impose a tax bill threatening their already fragile livelihoods. This was not just another protest; it was a youth-led revolution. With smartphones as their weapons and hashtags as their battle cries, they shook the foundations of power in Kenya and, in the process, sparked a fire of activism across Africa. From Nairobi to Lagos, from Cape Town to Kampala, Africa's youth were awakened, their voices now louder than ever. The message was clear: the time for passive acceptance was over, and the future of Africa belonged to its boldest generation yet.\n\nIn the middle of the year 2024, exactly on June 1, 2024, Kenya was shaken by widespread protests against the controversial Finance Bill 2024, a legislation that proposed increased taxes on fuel, housing, and digital content. The bill, part of President William Ruto's government's plan to raise revenue, was met with fierce opposition, especially from the country's youth.",
+        "excerpt": "Exploring how Kenya's Gen Z protests against the 2024 Finance Bill ignited a continent-wide youth movement, demonstrating the power of digital activism and cross-border solidarity in modern Africa.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:51:12.591000",
+        "updated_at": "2025-07-05T07:51:12.591000",
+        "published": true,
+        "tags": [
+          "Gen Z",
+          "Kenya",
+          "Youth Movement",
+          "Digital Activism",
+          "Pan-African",
+          "Social Media",
+          "Finance Bill"
+        ],
+        "category": "Youth Activism",
+        "featured_image": null,
+        "reading_time": 1,
+        "paper_type": "article",
+        "academic_info": {
+          "type": "analytical_article",
+          "institution": "Mount Kenya University",
+          "field": "Political Science and Youth Studies"
+        }
+      },
+      {
+        "id": "af8914bd-48fd-4cbd-aaa1-647e68c4e36b",
+        "title": "From Political Domination to Economic Subjugation: Assessing the Impacts of International Financial Institutions on African Sovereignty",
+        "content": "Introduction\nIn 1983, tens of thousands of Zambians took to the streets in mass protests against the 1983 Agreement, a policy enforced under the structural adjustments programs (SAPs) of the International Monetary Fund (IMF) and the World Bank that involved among other things the devaluation of currency, decontrol of prices of essential commodities and the removal of subsidies on maize and fertilisers. Similarly, in 2024, Kenya was rocked by nationwide protests against the proposed 2024/2025 Finance Bill, which introduced steep tax hikes on basic commodities. For millions of Kenyans, already grappling with the rising cost of living, these measures were a direct assault to their livelihoods. The government, however, defended the bill as necessary to meet the stringent fiscal targets set by international lenders like the IMF, whose support was critical to Kenya's mounting debt crisis. Both of these scenes, not only encapsulate the complexities of Africa's economic journey, a journey shaped by both the pull of global agendas and the push for self-determination on the continent, but also echoe a deeper narrative across Africa: the persistent challenge of balancing the demands of global financial institutions with their own aspirations for sovereignty and sustainable development.",
+        "excerpt": "A critical analysis of how IMF and World Bank policies impact African sovereignty and sustainable development, examining the tension between global financial institutions and national self-determination.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:50:55.606000",
+        "updated_at": "2025-07-05T07:50:55.606000",
+        "published": true,
+        "tags": [
+          "IMF",
+          "World Bank",
+          "African Sovereignty",
+          "Economic Policy",
+          "Structural Adjustment",
+          "Development"
+        ],
+        "category": "International Economics",
+        "featured_image": null,
+        "reading_time": 1,
+        "paper_type": "academic",
+        "academic_info": {
+          "type": "research_paper",
+          "institution": "Mount Kenya University",
+          "field": "International Economics and Development"
+        }
+      },
+      {
+        "id": "df74ec7b-5a7c-468b-b9b9-2c89907c1862",
+        "title": "The Legal Obligation of the State in Addressing Climate Change-Induced Disasters in the Global South",
+        "content": "Introduction\nOver the past three decades, in a changing world threatened by annihilation, humanity has negotiated to stabilize greenhouse gases for the survival of both present and future generations. Under the UN's patronage, states concluded agreements, including the UNFCCC and Paris Agreement, based on the core principle of common but differentiated responsibilities concerning climate-induced disasters, as enshrined under Article 3(1) of the UNFCCC. This principle, on one hand, underscores that developing countries, especially in the Global South, are entitled to differentiated responsibilities when addressing climate change disasters, owing to historical inequities in contribution to global emissions. As a matter of fact, according to the IPCC, climate change disproportionately impacts developing nations, with over 1 billion people expected to face acute food insecurity by 2050 due to climate-related challenges. On the other hand, it opines that developed nations, having historically contributed more to climate change, bear a greater burden in terms of mitigation and support. The two aforementioned agreements underscore the urgency for all nations, especially developed ones, to mitigate greenhouse gas emissions and assist developing countries, which bear the disproportionate effects of climate-induced disasters such as cyclones, droughts, and floods.",
+        "excerpt": "Examining the legal obligations of Global South states in addressing climate change-induced disasters while balancing human rights protection and indigenous peoples' rights.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:50:39.126000",
+        "updated_at": "2025-07-05T07:50:39.126000",
+        "published": true,
+        "tags": [
+          "Climate Change",
+          "Human Rights",
+          "Global South",
+          "Legal Obligations",
+          "Environmental Law"
+        ],
+        "category": "Climate Law",
+        "featured_image": null,
+        "reading_time": 1,
+        "paper_type": "academic",
+        "academic_info": {
+          "type": "research_paper",
+          "institution": "Mount Kenya University",
+          "field": "Environmental and Climate Law"
+        }
+      },
+      {
+        "id": "50a42eee-39f9-48f8-9217-e889c31a80aa",
+        "title": "The Role of the Intellectual Property in Attaining the SDGs through Creativity and Innovation",
+        "content": "Introduction\nIn the face of a threat of annihilation due to climate change, in the past few decades, going from Tokyo to Rio, from Rio to Paris and from Paris to Baku, States and Non-States Actors engaged into various negotiations aimed at promoting sustainable development. The concept of Sustainable Development was defined in the Brundtland report of 1987 titled \"Our Common Future\" as a form of development that meets the needs of the present without compromising the ability of future generations to meet their own needs. At the Earth Summit held in Rio de Janeiro in June 1992, Sustainable Development was recognized and subsequently translated into a series of agreements, including the Paris Agreement of 2015. In September 2015, the United Nations adopted 17 goals of Sustainable Development as part of its 2030 Agenda. In 2023, the United Nations Economic and Social Council in its report noted that at the midpoint to 2030, global progress on SDGs remain uneven and the world is not even on track to achieve SDGs. According to the WTO, Intellectual Property Rights (IPRs) are the rights given to persons over the creations of their minds. Their origins can be traced to the need for individuals and societies to foster creativity and innovation. However, despite its ability to drive change through creativity and innovation, the IP has been understated within various international agreements. In this regard, considering the urgency of attaining SDGs, this essay firstly elaborates on the types of IPRs and their legal regimes, secondly it demonstrates the critical role of IP in attaining SDGs through the reduction of inequalities, promotion of innovation, creation of jobs and alleviation of poverty. Lastly, it tackles commercialization and enforcement challenges of IPRs.",
+        "excerpt": "An in-depth analysis of how Intellectual Property Rights serve as catalysts for achieving the UN Sustainable Development Goals through creativity, innovation, and economic empowerment.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:50:21.689000",
+        "updated_at": "2025-07-05T07:50:21.689000",
+        "published": true,
+        "tags": [
+          "Intellectual Property",
+          "SDGs",
+          "Innovation",
+          "Sustainable Development",
+          "Legal Analysis"
+        ],
+        "category": "Law & Policy",
+        "featured_image": null,
+        "reading_time": 1,
+        "paper_type": "academic",
+        "academic_info": {
+          "type": "research_paper",
+          "institution": "Mount Kenya University",
+          "field": "International Law"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Get Blog Categories",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/blog/categories",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": [
+      "Climate Law",
+      "International Economics",
+      "Law & Policy",
+      "Youth Activism"
+    ]
+  },
+  {
+    "name": "Get Blog Tags",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/blog/tags",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": [
+      "Pan-African",
+      "Law & Policy",
+      "African Sovereignty",
+      "Gen Z",
+      "Sustainable Development",
+      "SDGs",
+      "Digital Activism",
+      "Climate Law",
+      "Youth Movement",
+      "Innovation",
+      "Human Rights",
+      "Legal Obligations",
+      "Intellectual Property",
+      "IMF",
+      "Environmental Law",
+      "Global South",
+      "Test",
+      "Structural Adjustment",
+      "Economic Policy",
+      "Development",
+      "Kenya",
+      "Social Media",
+      "World Bank",
+      "Legal Analysis",
+      "Climate Change",
+      "Finance Bill"
+    ]
+  },
+  {
+    "name": "Get Featured Blog Posts",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/blog/featured",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": [
+      {
+        "id": "7adc4fa7-1c21-4f22-ba30-44eb1bedd685",
+        "title": "Test Academic Paper",
+        "content": "This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. ",
+        "excerpt": "A brief overview of the test academic paper and its findings.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T08:04:17.744000",
+        "updated_at": "2025-07-05T08:04:17.744000",
+        "published": true,
+        "tags": [
+          "Law & Policy",
+          "Climate Law",
+          "Test"
+        ],
+        "category": "Law & Policy",
+        "featured_image": null,
+        "reading_time": 2,
+        "paper_type": "academic",
+        "academic_info": {
+          "institution": "Test University",
+          "field": "International Law",
+          "type": "Research Paper"
+        }
+      },
+      {
+        "id": "10c90c6f-1289-478a-b11a-6dfe619c9b3d",
+        "title": "From Streets to Screens: How Kenyan Gen Z Protests Against the Finance Bill Sparked a Pan-African Youth Movement",
+        "content": "Introduction\nImagine a generation born into a world of digital connectivity, yet disconnected from the opportunities it promised. In June 2023, Kenya's Gen Z young, restless, and relentless, took to the streets to defy a government that sought to impose a tax bill threatening their already fragile livelihoods. This was not just another protest; it was a youth-led revolution. With smartphones as their weapons and hashtags as their battle cries, they shook the foundations of power in Kenya and, in the process, sparked a fire of activism across Africa. From Nairobi to Lagos, from Cape Town to Kampala, Africa's youth were awakened, their voices now louder than ever. The message was clear: the time for passive acceptance was over, and the future of Africa belonged to its boldest generation yet.\n\nIn the middle of the year 2024, exactly on June 1, 2024, Kenya was shaken by widespread protests against the controversial Finance Bill 2024, a legislation that proposed increased taxes on fuel, housing, and digital content. The bill, part of President William Ruto's government's plan to raise revenue, was met with fierce opposition, especially from the country's youth.",
+        "excerpt": "Exploring how Kenya's Gen Z protests against the 2024 Finance Bill ignited a continent-wide youth movement, demonstrating the power of digital activism and cross-border solidarity in modern Africa.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:51:12.591000",
+        "updated_at": "2025-07-05T07:51:12.591000",
+        "published": true,
+        "tags": [
+          "Gen Z",
+          "Kenya",
+          "Youth Movement",
+          "Digital Activism",
+          "Pan-African",
+          "Social Media",
+          "Finance Bill"
+        ],
+        "category": "Youth Activism",
+        "featured_image": null,
+        "reading_time": 1,
+        "paper_type": "article",
+        "academic_info": {
+          "type": "analytical_article",
+          "institution": "Mount Kenya University",
+          "field": "Political Science and Youth Studies"
+        }
+      },
+      {
+        "id": "af8914bd-48fd-4cbd-aaa1-647e68c4e36b",
+        "title": "From Political Domination to Economic Subjugation: Assessing the Impacts of International Financial Institutions on African Sovereignty",
+        "content": "Introduction\nIn 1983, tens of thousands of Zambians took to the streets in mass protests against the 1983 Agreement, a policy enforced under the structural adjustments programs (SAPs) of the International Monetary Fund (IMF) and the World Bank that involved among other things the devaluation of currency, decontrol of prices of essential commodities and the removal of subsidies on maize and fertilisers. Similarly, in 2024, Kenya was rocked by nationwide protests against the proposed 2024/2025 Finance Bill, which introduced steep tax hikes on basic commodities. For millions of Kenyans, already grappling with the rising cost of living, these measures were a direct assault to their livelihoods. The government, however, defended the bill as necessary to meet the stringent fiscal targets set by international lenders like the IMF, whose support was critical to Kenya's mounting debt crisis. Both of these scenes, not only encapsulate the complexities of Africa's economic journey, a journey shaped by both the pull of global agendas and the push for self-determination on the continent, but also echoe a deeper narrative across Africa: the persistent challenge of balancing the demands of global financial institutions with their own aspirations for sovereignty and sustainable development.",
+        "excerpt": "A critical analysis of how IMF and World Bank policies impact African sovereignty and sustainable development, examining the tension between global financial institutions and national self-determination.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:50:55.606000",
+        "updated_at": "2025-07-05T07:50:55.606000",
+        "published": true,
+        "tags": [
+          "IMF",
+          "World Bank",
+          "African Sovereignty",
+          "Economic Policy",
+          "Structural Adjustment",
+          "Development"
+        ],
+        "category": "International Economics",
+        "featured_image": null,
+        "reading_time": 1,
+        "paper_type": "academic",
+        "academic_info": {
+          "type": "research_paper",
+          "institution": "Mount Kenya University",
+          "field": "International Economics and Development"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Search Blog Posts",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/blog",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": [
+      {
+        "id": "7adc4fa7-1c21-4f22-ba30-44eb1bedd685",
+        "title": "Test Academic Paper",
+        "content": "This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. ",
+        "excerpt": "A brief overview of the test academic paper and its findings.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T08:04:17.744000",
+        "updated_at": "2025-07-05T08:04:17.744000",
+        "published": true,
+        "tags": [
+          "Law & Policy",
+          "Climate Law",
+          "Test"
+        ],
+        "category": "Law & Policy",
+        "featured_image": null,
+        "reading_time": 2,
+        "paper_type": "academic",
+        "academic_info": {
+          "institution": "Test University",
+          "field": "International Law",
+          "type": "Research Paper"
+        }
+      },
+      {
+        "id": "10c90c6f-1289-478a-b11a-6dfe619c9b3d",
+        "title": "From Streets to Screens: How Kenyan Gen Z Protests Against the Finance Bill Sparked a Pan-African Youth Movement",
+        "content": "Introduction\nImagine a generation born into a world of digital connectivity, yet disconnected from the opportunities it promised. In June 2023, Kenya's Gen Z young, restless, and relentless, took to the streets to defy a government that sought to impose a tax bill threatening their already fragile livelihoods. This was not just another protest; it was a youth-led revolution. With smartphones as their weapons and hashtags as their battle cries, they shook the foundations of power in Kenya and, in the process, sparked a fire of activism across Africa. From Nairobi to Lagos, from Cape Town to Kampala, Africa's youth were awakened, their voices now louder than ever. The message was clear: the time for passive acceptance was over, and the future of Africa belonged to its boldest generation yet.\n\nIn the middle of the year 2024, exactly on June 1, 2024, Kenya was shaken by widespread protests against the controversial Finance Bill 2024, a legislation that proposed increased taxes on fuel, housing, and digital content. The bill, part of President William Ruto's government's plan to raise revenue, was met with fierce opposition, especially from the country's youth.",
+        "excerpt": "Exploring how Kenya's Gen Z protests against the 2024 Finance Bill ignited a continent-wide youth movement, demonstrating the power of digital activism and cross-border solidarity in modern Africa.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:51:12.591000",
+        "updated_at": "2025-07-05T07:51:12.591000",
+        "published": true,
+        "tags": [
+          "Gen Z",
+          "Kenya",
+          "Youth Movement",
+          "Digital Activism",
+          "Pan-African",
+          "Social Media",
+          "Finance Bill"
+        ],
+        "category": "Youth Activism",
+        "featured_image": null,
+        "reading_time": 1,
+        "paper_type": "article",
+        "academic_info": {
+          "type": "analytical_article",
+          "institution": "Mount Kenya University",
+          "field": "Political Science and Youth Studies"
+        }
+      },
+      {
+        "id": "af8914bd-48fd-4cbd-aaa1-647e68c4e36b",
+        "title": "From Political Domination to Economic Subjugation: Assessing the Impacts of International Financial Institutions on African Sovereignty",
+        "content": "Introduction\nIn 1983, tens of thousands of Zambians took to the streets in mass protests against the 1983 Agreement, a policy enforced under the structural adjustments programs (SAPs) of the International Monetary Fund (IMF) and the World Bank that involved among other things the devaluation of currency, decontrol of prices of essential commodities and the removal of subsidies on maize and fertilisers. Similarly, in 2024, Kenya was rocked by nationwide protests against the proposed 2024/2025 Finance Bill, which introduced steep tax hikes on basic commodities. For millions of Kenyans, already grappling with the rising cost of living, these measures were a direct assault to their livelihoods. The government, however, defended the bill as necessary to meet the stringent fiscal targets set by international lenders like the IMF, whose support was critical to Kenya's mounting debt crisis. Both of these scenes, not only encapsulate the complexities of Africa's economic journey, a journey shaped by both the pull of global agendas and the push for self-determination on the continent, but also echoe a deeper narrative across Africa: the persistent challenge of balancing the demands of global financial institutions with their own aspirations for sovereignty and sustainable development.",
+        "excerpt": "A critical analysis of how IMF and World Bank policies impact African sovereignty and sustainable development, examining the tension between global financial institutions and national self-determination.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:50:55.606000",
+        "updated_at": "2025-07-05T07:50:55.606000",
+        "published": true,
+        "tags": [
+          "IMF",
+          "World Bank",
+          "African Sovereignty",
+          "Economic Policy",
+          "Structural Adjustment",
+          "Development"
+        ],
+        "category": "International Economics",
+        "featured_image": null,
+        "reading_time": 1,
+        "paper_type": "academic",
+        "academic_info": {
+          "type": "research_paper",
+          "institution": "Mount Kenya University",
+          "field": "International Economics and Development"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Filter Blog Posts by Category",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/blog",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": [
+      {
+        "id": "7adc4fa7-1c21-4f22-ba30-44eb1bedd685",
+        "title": "Test Academic Paper",
+        "content": "This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. This is a comprehensive test of an academic paper with detailed analysis and research findings. ",
+        "excerpt": "A brief overview of the test academic paper and its findings.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T08:04:17.744000",
+        "updated_at": "2025-07-05T08:04:17.744000",
+        "published": true,
+        "tags": [
+          "Law & Policy",
+          "Climate Law",
+          "Test"
+        ],
+        "category": "Law & Policy",
+        "featured_image": null,
+        "reading_time": 2,
+        "paper_type": "academic",
+        "academic_info": {
+          "institution": "Test University",
+          "field": "International Law",
+          "type": "Research Paper"
+        }
+      },
+      {
+        "id": "50a42eee-39f9-48f8-9217-e889c31a80aa",
+        "title": "The Role of the Intellectual Property in Attaining the SDGs through Creativity and Innovation",
+        "content": "Introduction\nIn the face of a threat of annihilation due to climate change, in the past few decades, going from Tokyo to Rio, from Rio to Paris and from Paris to Baku, States and Non-States Actors engaged into various negotiations aimed at promoting sustainable development. The concept of Sustainable Development was defined in the Brundtland report of 1987 titled \"Our Common Future\" as a form of development that meets the needs of the present without compromising the ability of future generations to meet their own needs. At the Earth Summit held in Rio de Janeiro in June 1992, Sustainable Development was recognized and subsequently translated into a series of agreements, including the Paris Agreement of 2015. In September 2015, the United Nations adopted 17 goals of Sustainable Development as part of its 2030 Agenda. In 2023, the United Nations Economic and Social Council in its report noted that at the midpoint to 2030, global progress on SDGs remain uneven and the world is not even on track to achieve SDGs. According to the WTO, Intellectual Property Rights (IPRs) are the rights given to persons over the creations of their minds. Their origins can be traced to the need for individuals and societies to foster creativity and innovation. However, despite its ability to drive change through creativity and innovation, the IP has been understated within various international agreements. In this regard, considering the urgency of attaining SDGs, this essay firstly elaborates on the types of IPRs and their legal regimes, secondly it demonstrates the critical role of IP in attaining SDGs through the reduction of inequalities, promotion of innovation, creation of jobs and alleviation of poverty. Lastly, it tackles commercialization and enforcement challenges of IPRs.",
+        "excerpt": "An in-depth analysis of how Intellectual Property Rights serve as catalysts for achieving the UN Sustainable Development Goals through creativity, innovation, and economic empowerment.",
+        "author": "Benjamin Kyamoneka Mpey",
+        "created_at": "2025-07-05T07:50:21.689000",
+        "updated_at": "2025-07-05T07:50:21.689000",
+        "published": true,
+        "tags": [
+          "Intellectual Property",
+          "SDGs",
+          "Innovation",
+          "Sustainable Development",
+          "Legal Analysis"
+        ],
+        "category": "Law & Policy",
+        "featured_image": null,
+        "reading_time": 1,
+        "paper_type": "academic",
+        "academic_info": {
+          "type": "research_paper",
+          "institution": "Mount Kenya University",
+          "field": "International Law"
+        }
+      }
+    ]
   }
 ]

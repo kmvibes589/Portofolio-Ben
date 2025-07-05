@@ -529,6 +529,16 @@ class PortfolioAPITester:
         self.test_contact_endpoint()
         self.test_contact_with_different_message_types()
         
+        # Test blog endpoints
+        self.test_blog_create_post()
+        self.test_blog_get_posts()
+        self.test_blog_get_categories()
+        self.test_blog_get_tags()
+        self.test_blog_get_featured()
+        self.test_blog_get_post_by_id()
+        self.test_blog_search()
+        self.test_blog_filter_by_category()
+        
         # Print summary
         print("\n📊 Test Summary:")
         print(f"Tests Run: {self.tests_run}")

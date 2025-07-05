@@ -11,6 +11,7 @@ class PortfolioAPITester:
         self.tests_passed = 0
         self.test_results = []
         self.supported_languages = ["en", "fr", "ar", "zh", "es"]
+        self.blog_post_id = None  # Will store a blog post ID for testing
 
     def run_test(self, name, method, endpoint, expected_status=200, data=None, params=None):
         """Run a single API test"""

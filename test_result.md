@@ -150,8 +150,8 @@ backend:
     needs_retesting: true
     status_history:
       - working: true
-        agent: "main"
-        comment: "Complete blog CRUD operations with admin authentication"
+        agent: "testing"
+        comment: "Complete blog CRUD operations with admin authentication tested successfully. Creating, retrieving, updating, and deleting blog posts all work as expected with proper authentication."
 
   - task: "Static File Serving"
     implemented: true

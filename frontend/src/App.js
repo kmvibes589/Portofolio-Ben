@@ -1222,7 +1222,12 @@ function App() {
               <main>
                 <HeroSection aboutData={aboutData} currentLang={currentLang} />
                 <AboutSection aboutData={aboutData} currentLang={currentLang} />
-                {/* Add other sections here as needed */}
+                <LeadershipSection leadershipData={leadershipData} currentLang={currentLang} />
+                <AchievementsSection achievementsData={achievementsData} currentLang={currentLang} />
+                <EventsSection eventsData={eventsData} currentLang={currentLang} />
+                <ProjectsSection projectsData={projectsData} currentLang={currentLang} />
+                <ContactSection currentLang={currentLang} />
+                <Footer currentLang={currentLang} />
               </main>
             } />
           </Routes>

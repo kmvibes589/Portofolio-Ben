@@ -1,0 +1,353 @@
+[
+  {
+    "name": "Get About Data",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/portfolio/about",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "name": "Benjamin Kyamoneka Mpey",
+      "title": "Youth Leader & Human Rights Activist",
+      "tagline": "Empowering Youth. Defending Rights. Inspiring Change.",
+      "age": 21,
+      "nationality": "Congolese",
+      "based_in": "Kenya",
+      "bio": "I am Kyamoneka Mpey Benjamin, a 21-year-old Congolese human rights activist based in Kenya, committed to justice, equality, and environmental sustainability. My advocacy focuses on empowering young people through human rights education, digital safety, climate action, and legal literacy. At Amnesty International Kenya, I support the Privacy First Campaign, advocating for a safer internet and data protection for youth. Through Lawrit Journal of Law and Legal Alliance Associates, I organize debates, workshops, and trainings that promote civic education, legal research, and climate awareness\u2014impacting hundreds of students across Africa.\n\nI was the youngest participant selected globally to attend the 2025 Venice School for Human Rights Defenders, and I've been named a Youth Delegate to two major events: the HISA Youth Fellowship in Oxford (23\u201326 August 2025) and the \"You(th) Rebuilding the Broken)\" Workshop in Brussels (31 July\u20133 August 2025), focused on youth-led democratic renewal. I am also part of the Global Youth MIDORI Platform, promoting youth engagement in biodiversity and sustainability.\n\nI believe that education is the most powerful tool for change and that youth are not only the future\u2014they are the driving force of transformation today.",
+      "focus_areas": [
+        "Human Rights Advocacy",
+        "Climate Action",
+        "Digital Privacy Rights",
+        "Legal Literacy",
+        "Youth Empowerment",
+        "Environmental Justice"
+      ],
+      "mission": "To empower young people through human rights education, digital safety, climate action, and legal literacy.",
+      "vision": "A world where youth are recognized as powerful agents of change and where human rights, environmental justice, and digital privacy are protected for all."
+    }
+  },
+  {
+    "name": "Get Leadership Data",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/portfolio/leadership",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "current_positions": [
+        {
+          "title": "Privacy First Campaigner",
+          "organization": "Amnesty International Kenya",
+          "period": "March 2025 \u2013 Present",
+          "description": "Leading advocacy for digital rights and privacy protections",
+          "responsibilities": [
+            "Conducting research on privacy laws and violations",
+            "Organizing national workshops and policy dialogues on surveillance and youth safety online"
+          ]
+        },
+        {
+          "title": "Country Director",
+          "organization": "Lawrit Journal of Law (DRC Chapter)",
+          "period": "Since August 2024",
+          "description": "Representing the DRC in a youth-led legal education and advocacy platform",
+          "responsibilities": [
+            "Coordinating legal literacy sessions, webinars, and publishing opportunities for students",
+            "Bridging Francophone youth voices with pan-African legal innovation"
+          ]
+        },
+        {
+          "title": "Red Card Ambassador",
+          "organization": "African Renaissance and Diaspora Network",
+          "period": "Jan \u2013 Jun 2025",
+          "description": "Managed digital outreach campaigns in support of gender equality",
+          "responsibilities": [
+            "Organized virtual events and Red Card advocacy actions aligned with SDG 5"
+          ]
+        },
+        {
+          "title": "Member, Communication Department",
+          "organization": "Black Professionals in International Affairs (BPIA)",
+          "period": "Since July 2024",
+          "description": "Supporting strategic communication and youth engagement",
+          "responsibilities": [
+            "Assisting in the development of briefs and visibility content related to African youth in international affairs"
+          ]
+        }
+      ],
+      "past_positions": [
+        {
+          "title": "Head of the Department of Indigenous People",
+          "organization": "Les Toges Vertes",
+          "period": "Jul 2022 \u2013 Dec 2022",
+          "description": "Led community-based legal interventions for Indigenous detainees in Goma",
+          "responsibilities": [
+            "Conducted prison interviews, gathered testimonies, and drafted human rights reports"
+          ]
+        },
+        {
+          "title": "Co-Founder & President",
+          "organization": "EDDEC (Act for a Sustainable Development of the Environment in Congo)",
+          "period": "Dec 2019 \u2013 Dec 2021",
+          "description": "Designed and implemented environmental sustainability programs",
+          "responsibilities": [
+            "Led tree-planting campaign (6,000 trees in 35 schools)",
+            "Formed environmental partnerships with WWF, FFN, and the Provincial Ministry of Environment",
+            "Led school-based awareness campaigns impacting over 3,000 learners"
+          ]
+        },
+        {
+          "title": "Volunteer",
+          "organization": "North Kivu Women's Platform (PFNDE)",
+          "period": "Feb 2023 \u2013 Aug 2023",
+          "description": "Conducted surveys and led advocacy campaigns",
+          "responsibilities": [
+            "Conducted surveys in 20 schools on sexual abuse and harassment",
+            "Co-led a campaign against gender-based violence during the 16 Days of Activism 2023"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Get Achievements Data",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/portfolio/achievements",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "fellowships": [
+        {
+          "title": "Venice School for Human Rights Defenders",
+          "organization": "International Commission of Jurists",
+          "year": "2025",
+          "location": "Venice, Italy",
+          "distinction": "Youngest Participant Globally"
+        },
+        {
+          "title": "HISA Youth Fellowship",
+          "organization": "HISA",
+          "year": "2025",
+          "location": "Oxford, UK",
+          "distinction": "Youth Delegate"
+        },
+        {
+          "title": "You(th) Rebuilding the Broken Workshop",
+          "organization": "Youth Democratic Renewal",
+          "year": "2025",
+          "location": "Brussels, Belgium",
+          "distinction": "Youth Delegate"
+        },
+        {
+          "title": "Aspire Leadership Program",
+          "organization": "Aspire Institute & Harvard Business School",
+          "year": "2025"
+        },
+        {
+          "title": "Online Anti-Corruption Autumn School",
+          "organization": "University of Oxford",
+          "year": "2024"
+        },
+        {
+          "title": "UNODC/IACA Training",
+          "organization": "Global Youth Climate Leadership",
+          "year": "2024",
+          "location": "Switzerland"
+        }
+      ],
+      "awards": [
+        {
+          "title": "Winner - Mock ICJ Moot on Climate Change",
+          "organization": "Kenya Model United Nations",
+          "year": "2024"
+        },
+        {
+          "title": "Best Upcoming Mooter",
+          "organization": "1st Kenya ICJ Moot, USIU-Kenya",
+          "year": "2024"
+        },
+        {
+          "title": "Best Male Orator",
+          "organization": "MKU Moot Court Competition",
+          "year": "2024"
+        },
+        {
+          "title": "Best Male Orator",
+          "organization": "6th Bachelor Moot Court, MKU",
+          "year": "2024"
+        },
+        {
+          "title": "Best Diplomat",
+          "organization": "6th Intervarsity Diplomatic Conference, KEMUN",
+          "year": "2024"
+        },
+        {
+          "title": "Second Best Memorial",
+          "organization": "KeMUN Refugee Moot",
+          "year": "2024"
+        },
+        {
+          "title": "Finalist",
+          "organization": "MKU 1st Debate Championship",
+          "year": "2023"
+        },
+        {
+          "title": "Winner - Ka Mana Prize",
+          "organization": "Ka Mana Foundation",
+          "year": "2023"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Get Events Data",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/portfolio/events",
+    "method": "GET",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "upcoming_events": [
+        {
+          "title": "HISA Youth Fellowship",
+          "location": "Oxford, UK",
+          "date": "August 23-26, 2025",
+          "type": "Fellowship",
+          "description": "International youth leadership and policy development program"
+        },
+        {
+          "title": "You(th) Rebuilding the Broken Workshop",
+          "location": "Brussels, Belgium",
+          "date": "July 31 - August 3, 2025",
+          "type": "Workshop",
+          "description": "Youth-led democratic renewal and governance workshop"
+        }
+      ],
+      "past_events": [
+        {
+          "title": "Venice School for Human Rights Defenders",
+          "location": "Venice, Italy",
+          "date": "2025",
+          "type": "Training",
+          "description": "Intensive human rights defenders training program"
+        },
+        {
+          "title": "Privacy First Campaign Launch",
+          "location": "Nairobi, Kenya",
+          "date": "March 2025",
+          "type": "Campaign Launch",
+          "description": "Digital rights and privacy protection campaign for youth"
+        },
+        {
+          "title": "Kenya Model United Nations",
+          "location": "Nairobi, Kenya",
+          "date": "2024",
+          "type": "Competition",
+          "description": "Mock ICJ Moot on Climate Change - Winner"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Submit Contact Form",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/contact",
+    "method": "POST",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "id": "57010d1c-6971-489b-8617-d26689b86374",
+      "name": "Test User",
+      "email": "test@example.com",
+      "subject": "API Test",
+      "message": "This is a test message from the API test suite.",
+      "message_type": "general",
+      "timestamp": "2025-07-05T06:58:19.907437"
+    }
+  },
+  {
+    "name": "Submit Contact Form - general",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/contact",
+    "method": "POST",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "id": "964d6a1b-6e93-4d10-95cd-c35e412a6372",
+      "name": "Test User - general",
+      "email": "test_general@example.com",
+      "subject": "API Test - general",
+      "message": "This is a test message for general inquiry.",
+      "message_type": "general",
+      "timestamp": "2025-07-05T06:58:19.938338"
+    }
+  },
+  {
+    "name": "Submit Contact Form - speaking",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/contact",
+    "method": "POST",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "id": "6d41204f-f91d-434e-840a-c48b39b67b25",
+      "name": "Test User - speaking",
+      "email": "test_speaking@example.com",
+      "subject": "API Test - speaking",
+      "message": "This is a test message for speaking inquiry.",
+      "message_type": "speaking",
+      "timestamp": "2025-07-05T06:58:19.976871"
+    }
+  },
+  {
+    "name": "Submit Contact Form - collaboration",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/contact",
+    "method": "POST",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "id": "ad903174-dcb1-4fd2-af14-efd333a7e3fc",
+      "name": "Test User - collaboration",
+      "email": "test_collaboration@example.com",
+      "subject": "API Test - collaboration",
+      "message": "This is a test message for collaboration inquiry.",
+      "message_type": "collaboration",
+      "timestamp": "2025-07-05T06:58:19.999686"
+    }
+  },
+  {
+    "name": "Submit Contact Form - media",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/contact",
+    "method": "POST",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "id": "7e3bf3db-662f-4055-990e-dfc1f2ecea28",
+      "name": "Test User - media",
+      "email": "test_media@example.com",
+      "subject": "API Test - media",
+      "message": "This is a test message for media inquiry.",
+      "message_type": "media",
+      "timestamp": "2025-07-05T06:58:20.044044"
+    }
+  },
+  {
+    "name": "Submit Contact Form - mentorship",
+    "url": "https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com/api/contact",
+    "method": "POST",
+    "status_code": 200,
+    "expected_status": 200,
+    "success": true,
+    "response": {
+      "id": "b342eb33-4250-4a88-a75a-055d676a1130",
+      "name": "Test User - mentorship",
+      "email": "test_mentorship@example.com",
+      "subject": "API Test - mentorship",
+      "message": "This is a test message for mentorship inquiry.",
+      "message_type": "mentorship",
+      "timestamp": "2025-07-05T06:58:20.087085"
+    }
+  }
+]

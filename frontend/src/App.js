@@ -1140,12 +1140,14 @@ const Footer = ({ currentLang }) => {
     en: { 
       tagline: "Empowering Youth. Defending Rights. Inspiring Change.",
       copyright: "© 2025 Benjamin Kyamoneka Mpey. All rights reserved.",
-      mission: "Thank you for exploring my portfolio. My mission is rooted in justice, equity, and sustainability. I'm open to collaborations in legal reform, youth empowerment, environmental justice, and human rights advocacy."
+      mission: "Thank you for exploring my portfolio. My mission is rooted in justice, equity, and sustainability. I'm open to collaborations in legal reform, youth empowerment, environmental justice, and human rights advocacy.",
+      connect: "Connect with me on social media"
     },
     fr: {
       tagline: "Autonomiser la Jeunesse. Défendre les Droits. Inspirer le Changement.",
       copyright: "© 2025 Benjamin Kyamoneka Mpey. Tous droits réservés.",
-      mission: "Merci d'avoir exploré mon portfolio. Ma mission est enracinée dans la justice, l'équité et la durabilité. Je suis ouvert aux collaborations en réforme juridique, autonomisation des jeunes, justice environnementale et défense des droits humains."
+      mission: "Merci d'avoir exploré mon portfolio. Ma mission est enracinée dans la justice, l'équité et la durabilité. Je suis ouvert aux collaborations en réforme juridique, autonomisation des jeunes, justice environnementale et défense des droits humains.",
+      connect: "Connectez-vous avec moi sur les réseaux sociaux"
     }
   };
 
@@ -1159,16 +1161,51 @@ const Footer = ({ currentLang }) => {
           <p className="text-gray-300 mb-6">{labels.tagline}</p>
           <p className="text-gray-400 max-w-3xl mx-auto mb-8">{labels.mission}</p>
           
-          <div className="flex justify-center space-x-6 mb-8">
-            <a href="https://linkedin.com/in/kyamoneka-mpey-benjamin" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition duration-300">
-              LinkedIn
-            </a>
-            <a href="mailto:kyamompey@gmail.com" className="text-gray-300 hover:text-white transition duration-300">
-              Email
-            </a>
-            <a href="tel:+254797427649" className="text-gray-300 hover:text-white transition duration-300">
-              Phone
-            </a>
+          <div className="mb-6">
+            <p className="text-gray-300 mb-4">{labels.connect}</p>
+            <div className="flex justify-center space-x-6">
+              <a 
+                href="https://www.linkedin.com/in/kyamoneka-mpey-benjamin-177967298" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-300 hover:text-blue-400 transition duration-300 flex items-center space-x-2"
+              >
+                <span>💼</span>
+                <span>LinkedIn</span>
+              </a>
+              <a 
+                href="https://www.instagram.com/kyamompey" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-300 hover:text-pink-400 transition duration-300 flex items-center space-x-2"
+              >
+                <span>📷</span>
+                <span>Instagram</span>
+              </a>
+              <a 
+                href="https://www.tiktok.com/@kmbenvibes" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-300 hover:text-purple-400 transition duration-300 flex items-center space-x-2"
+              >
+                <span>🎵</span>
+                <span>TikTok</span>
+              </a>
+              <a 
+                href="mailto:kyamompey@gmail.com" 
+                className="text-gray-300 hover:text-red-400 transition duration-300 flex items-center space-x-2"
+              >
+                <span>📧</span>
+                <span>Email</span>
+              </a>
+              <a 
+                href="tel:+254797427649" 
+                className="text-gray-300 hover:text-green-400 transition duration-300 flex items-center space-x-2"
+              >
+                <span>📞</span>
+                <span>Phone</span>
+              </a>
+            </div>
           </div>
           
           <div className="mt-8 pt-8 border-t border-gray-700">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useParams, Link } from "react-router-dom";
 import axios from "axios";
+import AdminPanel from "./AdminPanel";
 import "./App.css";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;

@@ -299,6 +299,217 @@ class PortfolioAPITester:
                 all_success = False
         
         return all_success
+        
+    def test_blog_create_post(self):
+        """Test creating a blog post"""
+        test_data = {
+            "title": "Test Academic Paper",
+            "content": "This is a comprehensive test of an academic paper with detailed analysis and research findings. " * 20,
+            "excerpt": "A brief overview of the test academic paper and its findings.",
+            "tags": ["Law & Policy", "Climate Law", "Test"],
+            "category": "Law & Policy",
+            "paper_type": "academic",
+            "academic_info": {
+                "institution": "Test University",
+                "field": "International Law",
+                "type": "Research Paper"
+            }
+        }
+        
+        success, response = self.run_test(
+            "Create Blog Post",
+            "POST",
+            "blog",
+            201,
+            data=test_data
+        )
+        
+        if success:
+            data = response.json()
+            # Store the post ID for later tests
+            self.blog_post_id = data.get("id")
+            
+            # Verify the response contains the submitted data
+            for key, value in test_data.items():
+                if key not in data:
+                    print(f"⚠️ Warning: Response data missing field: {key}")
+                    return False
+                if key != "academic_info" and data[key] != value:
+                    print(f"⚠️ Warning: Response data does not match submitted data for field: {key}")
+                    return False
+            
+            # Check reading time was calculated
+            if "reading_time" not in data or not isinstance(data["reading_time"], int):
+                print("⚠️ Warning: Reading time not calculated correctly")
+                return False
+            
+            print("✅ Blog post creation successful")
+            return True
+        return False
+    
+    def test_blog_get_posts(self):
+        """Test getting blog posts"""
+        success, response = self.run_test(
+            "Get Blog Posts",
+            "GET",
+            "blog",
+            200
+        )
+        
+        if success:
+            data = response.json()
+            if not isinstance(data, list):
+                print("⚠️ Warning: Blog posts response is not a list")
+                return False
+            
+            if len(data) == 0:
+                print("⚠️ Warning: No blog posts returned")
+                return False
+            
+            # Check structure of first post
+            post = data[0]
+            required_fields = ["id", "title", "content", "excerpt", "author", "created_at", "tags", "category", "reading_time"]
+            missing_fields = [field for field in required_fields if field not in post]
+            
+            if missing_fields:
+                print(f"⚠️ Warning: Blog post missing fields: {', '.join(missing_fields)}")
+                return False
+            
+            print(f"✅ Successfully retrieved {len(data)} blog posts")
+            return True
+        return False
+    
+    def test_blog_get_categories(self):
+        """Test getting blog categories"""
+        success, response = self.run_test(
+            "Get Blog Categories",
+            "GET",
+            "blog/categories",
+            200
+        )
+        
+        if success:
+            data = response.json()
+            if not isinstance(data, list):
+                print("⚠️ Warning: Blog categories response is not a list")
+                return False
+            
+            expected_categories = ["Law & Policy", "Climate Law", "International Economics", "Youth Activism"]
+            found_categories = [cat for cat in expected_categories if cat in data]
+            
+            print(f"✅ Found categories: {', '.join(data)}")
+            return True
+        return False
+    
+    def test_blog_get_tags(self):
+        """Test getting blog tags"""
+        success, response = self.run_test(
+            "Get Blog Tags",
+            "GET",
+            "blog/tags",
+            200
+        )
+        
+        if success:
+            data = response.json()
+            if not isinstance(data, list):
+                print("⚠️ Warning: Blog tags response is not a list")
+                return False
+            
+            print(f"✅ Found tags: {', '.join(data)}")
+            return True
+        return False
+    
+    def test_blog_get_featured(self):
+        """Test getting featured blog posts"""
+        success, response = self.run_test(
+            "Get Featured Blog Posts",
+            "GET",
+            "blog/featured",
+            200
+        )
+        
+        if success:
+            data = response.json()
+            if not isinstance(data, list):
+                print("⚠️ Warning: Featured blog posts response is not a list")
+                return False
+            
+            print(f"✅ Successfully retrieved {len(data)} featured blog posts")
+            return True
+        return False
+    
+    def test_blog_get_post_by_id(self):
+        """Test getting a blog post by ID"""
+        if not self.blog_post_id:
+            print("⚠️ Warning: No blog post ID available for testing")
+            return False
+        
+        success, response = self.run_test(
+            "Get Blog Post by ID",
+            "GET",
+            f"blog/{self.blog_post_id}",
+            200
+        )
+        
+        if success:
+            data = response.json()
+            required_fields = ["id", "title", "content", "excerpt", "author", "created_at", "tags", "category", "reading_time"]
+            missing_fields = [field for field in required_fields if field not in data]
+            
+            if missing_fields:
+                print(f"⚠️ Warning: Blog post missing fields: {', '.join(missing_fields)}")
+                return False
+            
+            print("✅ Successfully retrieved blog post by ID")
+            return True
+        return False
+    
+    def test_blog_search(self):
+        """Test blog search functionality"""
+        success, response = self.run_test(
+            "Search Blog Posts",
+            "GET",
+            "blog",
+            200,
+            params={"search": "test"}
+        )
+        
+        if success:
+            data = response.json()
+            if not isinstance(data, list):
+                print("⚠️ Warning: Blog search response is not a list")
+                return False
+            
+            print(f"✅ Search returned {len(data)} results")
+            return True
+        return False
+    
+    def test_blog_filter_by_category(self):
+        """Test filtering blog posts by category"""
+        success, response = self.run_test(
+            "Filter Blog Posts by Category",
+            "GET",
+            "blog",
+            200,
+            params={"category": "Law & Policy"}
+        )
+        
+        if success:
+            data = response.json()
+            if not isinstance(data, list):
+                print("⚠️ Warning: Blog category filter response is not a list")
+                return False
+            
+            # Check that all returned posts have the correct category
+            for post in data:
+                if post.get("category") != "Law & Policy":
+                    print(f"⚠️ Warning: Post with incorrect category returned: {post.get('category')}")
+                    return False
+            
+            print(f"✅ Category filter returned {len(data)} results")
+            return True
+        return False
 
     def run_all_tests(self):
         """Run all API tests"""

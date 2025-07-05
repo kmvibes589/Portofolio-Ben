@@ -1292,6 +1292,7 @@ function App() {
           <Routes>
             <Route path="/blog" element={<BlogList />} />
             <Route path="/blog/:id" element={<BlogPost />} />
+            <Route path="/admin" element={<AdminPanel />} />
             <Route path="/" element={
               <main>
                 <HeroSection aboutData={aboutData} currentLang={currentLang} />

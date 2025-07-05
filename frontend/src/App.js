@@ -278,7 +278,7 @@ const EventsSection = ({ eventsData }) => {
             <h3 className="text-2xl font-bold text-gray-900 mb-6">🎯 Past Events</h3>
             <div className="space-y-4">
               {eventsData?.past_events?.map((event, index) => (
-                <div key={index} className="bg-gray-50 p-6 rounded-lg shadow-md">
+                <div key={index} className="bg-gray-50 p-6 rounded-lg shadow-md event-card-past">
                   <h4 className="text-lg font-bold text-gray-900 mb-2">{event.title}</h4>
                   <p className="text-blue-600 font-semibold mb-1">{event.location}</p>
                   <p className="text-gray-600 text-sm mb-3">{event.date} • {event.type}</p>

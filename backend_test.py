@@ -1,10 +1,13 @@
 import requests
 import unittest
 import json
+import os
 from datetime import datetime
+import mimetypes
+import tempfile
 
 class PortfolioAPITester:
-    def __init__(self, base_url="https://3067dd20-0f14-4a04-867b-67344709be32.preview.emergentagent.com"):
+    def __init__(self, base_url="https://c39d1efd-d471-42fc-bb51-7fd2fb2260e2.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.tests_run = 0
@@ -12,6 +15,8 @@ class PortfolioAPITester:
         self.test_results = []
         self.supported_languages = ["en", "fr", "ar", "zh", "es"]
         self.blog_post_id = None  # Will store a blog post ID for testing
+        self.admin_token = None   # Will store admin JWT token
+        self.uploaded_media_id = None  # Will store an uploaded media ID for testing
 
     def run_test(self, name, method, endpoint, expected_status=200, data=None, params=None):
         """Run a single API test"""

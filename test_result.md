@@ -126,8 +126,8 @@ backend:
     needs_retesting: true
     status_history:
       - working: true
-        agent: "main"
-        comment: "File upload endpoints for images/videos with category support implemented"
+        agent: "testing"
+        comment: "File upload endpoints for images/videos with category support tested successfully. Both image and video uploads work correctly, file type validation is enforced, and metadata is properly stored."
 
   - task: "Media Management API"
     implemented: true

@@ -233,7 +233,7 @@ const AchievementsSection = ({ achievementsData }) => {
             <h3 className="text-2xl font-bold text-gray-900 mb-6">🏆 Awards & Recognition</h3>
             <div className="space-y-4">
               {achievementsData?.awards?.map((award, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+                <div key={index} className="bg-white p-6 rounded-lg shadow-md achievement-card achievement-award">
                   <h4 className="text-lg font-bold text-gray-900 mb-2">{award.title}</h4>
                   <p className="text-blue-600 font-semibold mb-1">{award.organization}</p>
                   <p className="text-gray-600 text-sm">{award.year}</p>

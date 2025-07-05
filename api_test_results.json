@@ -256,13 +256,13 @@
     "expected_status": 200,
     "success": true,
     "response": {
-      "id": "57010d1c-6971-489b-8617-d26689b86374",
+      "id": "f26014cd-8359-4b88-b142-b49d8768c155",
       "name": "Test User",
       "email": "test@example.com",
       "subject": "API Test",
       "message": "This is a test message from the API test suite.",
       "message_type": "general",
-      "timestamp": "2025-07-05T06:58:19.907437"
+      "timestamp": "2025-07-05T07:02:20.243325"
     }
   },
   {
@@ -273,13 +273,13 @@
     "expected_status": 200,
     "success": true,
     "response": {
-      "id": "964d6a1b-6e93-4d10-95cd-c35e412a6372",
+      "id": "0d853de9-d893-43ca-bcc9-a2a4151370f3",
       "name": "Test User - general",
       "email": "test_general@example.com",
       "subject": "API Test - general",
       "message": "This is a test message for general inquiry.",
       "message_type": "general",
-      "timestamp": "2025-07-05T06:58:19.938338"
+      "timestamp": "2025-07-05T07:02:20.264485"
     }
   },
   {
@@ -290,13 +290,13 @@
     "expected_status": 200,
     "success": true,
     "response": {
-      "id": "6d41204f-f91d-434e-840a-c48b39b67b25",
+      "id": "ee9b901f-1cf0-42c4-bef2-2a029d7baa15",
       "name": "Test User - speaking",
       "email": "test_speaking@example.com",
       "subject": "API Test - speaking",
       "message": "This is a test message for speaking inquiry.",
       "message_type": "speaking",
-      "timestamp": "2025-07-05T06:58:19.976871"
+      "timestamp": "2025-07-05T07:02:20.324312"
     }
   },
   {
@@ -307,13 +307,13 @@
     "expected_status": 200,
     "success": true,
     "response": {
-      "id": "ad903174-dcb1-4fd2-af14-efd333a7e3fc",
+      "id": "fe9a3c9e-9be8-4b5b-badc-7bb45a24875a",
       "name": "Test User - collaboration",
       "email": "test_collaboration@example.com",
       "subject": "API Test - collaboration",
       "message": "This is a test message for collaboration inquiry.",
       "message_type": "collaboration",
-      "timestamp": "2025-07-05T06:58:19.999686"
+      "timestamp": "2025-07-05T07:02:20.344412"
     }
   },
   {
@@ -324,13 +324,13 @@
     "expected_status": 200,
     "success": true,
     "response": {
-      "id": "7e3bf3db-662f-4055-990e-dfc1f2ecea28",
+      "id": "7e30ad12-7112-456b-8f8d-ff3436d98150",
       "name": "Test User - media",
       "email": "test_media@example.com",
       "subject": "API Test - media",
       "message": "This is a test message for media inquiry.",
       "message_type": "media",
-      "timestamp": "2025-07-05T06:58:20.044044"
+      "timestamp": "2025-07-05T07:02:20.386817"
     }
   },
   {
@@ -341,13 +341,13 @@
     "expected_status": 200,
     "success": true,
     "response": {
-      "id": "b342eb33-4250-4a88-a75a-055d676a1130",
+      "id": "45f0fbfc-6658-4ad0-ab15-5cefe8e76b4f",
       "name": "Test User - mentorship",
       "email": "test_mentorship@example.com",
       "subject": "API Test - mentorship",
       "message": "This is a test message for mentorship inquiry.",
       "message_type": "mentorship",
-      "timestamp": "2025-07-05T06:58:20.087085"
+      "timestamp": "2025-07-05T07:02:20.403963"
     }
   }
 ]

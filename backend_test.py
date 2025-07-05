@@ -303,11 +303,15 @@ class PortfolioAPITester:
         """Run all API tests"""
         print("🚀 Starting API Tests...")
         
-        # Test portfolio endpoints
-        self.test_about_endpoint()
-        self.test_leadership_endpoint()
-        self.test_achievements_endpoint()
-        self.test_events_endpoint()
+        # Test languages endpoint
+        self.test_languages_endpoint()
+        
+        # Test portfolio endpoints with multi-language support
+        self.test_about_endpoint_multilanguage()
+        self.test_leadership_endpoint_multilanguage()
+        self.test_achievements_endpoint_multilanguage()
+        self.test_events_endpoint_multilanguage()
+        self.test_projects_endpoint()
         
         # Test contact endpoints
         self.test_contact_endpoint()

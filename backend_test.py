@@ -65,94 +65,180 @@ class PortfolioAPITester:
             })
             return False, None
 
-    def test_about_endpoint(self):
-        """Test the about endpoint"""
+    def test_languages_endpoint(self):
+        """Test the languages endpoint"""
         success, response = self.run_test(
-            "Get About Data",
+            "Get Supported Languages",
             "GET",
-            "portfolio/about",
+            "languages",
             200
         )
         if success:
             data = response.json()
-            # Verify essential fields
-            required_fields = ["name", "title", "bio", "focus_areas", "mission", "vision"]
-            missing_fields = [field for field in required_fields if field not in data]
+            # Verify all supported languages are present
+            for lang in self.supported_languages:
+                if lang not in data:
+                    print(f"⚠️ Warning: Language '{lang}' not found in supported languages")
+                    return False
             
-            if missing_fields:
-                print(f"⚠️ Warning: Missing fields in about data: {', '.join(missing_fields)}")
-                return False
-            
-            print("✅ About data contains all required fields")
+            print(f"✅ All languages supported: {', '.join(data.keys())}")
             return True
         return False
 
-    def test_leadership_endpoint(self):
-        """Test the leadership endpoint"""
-        success, response = self.run_test(
-            "Get Leadership Data",
-            "GET",
-            "portfolio/leadership",
-            200
-        )
-        if success:
-            data = response.json()
-            # Verify essential fields
-            if "current_positions" not in data or "past_positions" not in data:
-                print("⚠️ Warning: Missing current_positions or past_positions in leadership data")
-                return False
+    def test_about_endpoint_multilanguage(self):
+        """Test the about endpoint with different languages"""
+        all_success = True
+        
+        for lang in self.supported_languages:
+            success, response = self.run_test(
+                f"Get About Data - {lang}",
+                "GET",
+                "portfolio/about",
+                200,
+                params={"lang": lang}
+            )
             
-            if not data["current_positions"] or not data["past_positions"]:
-                print("⚠️ Warning: Empty current_positions or past_positions in leadership data")
-                return False
-            
-            print("✅ Leadership data contains all required fields")
-            return True
-        return False
+            if success:
+                data = response.json()
+                # Verify essential fields
+                required_fields = ["name", "title", "bio", "focus_areas", "mission", "vision"]
+                missing_fields = [field for field in required_fields if field not in data]
+                
+                if missing_fields:
+                    print(f"⚠️ Warning: Missing fields in about data for language '{lang}': {', '.join(missing_fields)}")
+                    all_success = False
+                else:
+                    print(f"✅ About data for language '{lang}' contains all required fields")
+            else:
+                all_success = False
+        
+        return all_success
 
-    def test_achievements_endpoint(self):
-        """Test the achievements endpoint"""
-        success, response = self.run_test(
-            "Get Achievements Data",
-            "GET",
-            "portfolio/achievements",
-            200
-        )
-        if success:
-            data = response.json()
-            # Verify essential fields
-            if "fellowships" not in data or "awards" not in data:
-                print("⚠️ Warning: Missing fellowships or awards in achievements data")
-                return False
+    def test_leadership_endpoint_multilanguage(self):
+        """Test the leadership endpoint with different languages"""
+        all_success = True
+        
+        for lang in self.supported_languages:
+            success, response = self.run_test(
+                f"Get Leadership Data - {lang}",
+                "GET",
+                "portfolio/leadership",
+                200,
+                params={"lang": lang}
+            )
             
-            if not data["fellowships"] or not data["awards"]:
-                print("⚠️ Warning: Empty fellowships or awards in achievements data")
-                return False
-            
-            print("✅ Achievements data contains all required fields")
-            return True
-        return False
+            if success:
+                data = response.json()
+                # Verify essential fields
+                if "current_positions" not in data or "past_positions" not in data:
+                    print(f"⚠️ Warning: Missing current_positions or past_positions in leadership data for language '{lang}'")
+                    all_success = False
+                    continue
+                
+                if not data["current_positions"] or not data["past_positions"]:
+                    print(f"⚠️ Warning: Empty current_positions or past_positions in leadership data for language '{lang}'")
+                    all_success = False
+                    continue
+                
+                print(f"✅ Leadership data for language '{lang}' contains all required fields")
+            else:
+                all_success = False
+        
+        return all_success
 
-    def test_events_endpoint(self):
-        """Test the events endpoint"""
+    def test_achievements_endpoint_multilanguage(self):
+        """Test the achievements endpoint with different languages"""
+        all_success = True
+        
+        for lang in self.supported_languages:
+            success, response = self.run_test(
+                f"Get Achievements Data - {lang}",
+                "GET",
+                "portfolio/achievements",
+                200,
+                params={"lang": lang}
+            )
+            
+            if success:
+                data = response.json()
+                # Verify essential fields
+                if "fellowships" not in data or "awards" not in data:
+                    print(f"⚠️ Warning: Missing fellowships or awards in achievements data for language '{lang}'")
+                    all_success = False
+                    continue
+                
+                if not data["fellowships"] or not data["awards"]:
+                    print(f"⚠️ Warning: Empty fellowships or awards in achievements data for language '{lang}'")
+                    all_success = False
+                    continue
+                
+                print(f"✅ Achievements data for language '{lang}' contains all required fields")
+            else:
+                all_success = False
+        
+        return all_success
+
+    def test_events_endpoint_multilanguage(self):
+        """Test the events endpoint with different languages"""
+        all_success = True
+        
+        for lang in self.supported_languages:
+            success, response = self.run_test(
+                f"Get Events Data - {lang}",
+                "GET",
+                "portfolio/events",
+                200,
+                params={"lang": lang}
+            )
+            
+            if success:
+                data = response.json()
+                # Verify essential fields
+                if "upcoming_events" not in data or "past_events" not in data:
+                    print(f"⚠️ Warning: Missing upcoming_events or past_events in events data for language '{lang}'")
+                    all_success = False
+                    continue
+                
+                if not data["upcoming_events"] or not data["past_events"]:
+                    print(f"⚠️ Warning: Empty upcoming_events or past_events in events data for language '{lang}'")
+                    all_success = False
+                    continue
+                
+                print(f"✅ Events data for language '{lang}' contains all required fields")
+            else:
+                all_success = False
+        
+        return all_success
+
+    def test_projects_endpoint(self):
+        """Test the projects endpoint"""
         success, response = self.run_test(
-            "Get Events Data",
+            "Get Projects Data",
             "GET",
-            "portfolio/events",
+            "portfolio/projects",
             200
         )
         if success:
             data = response.json()
             # Verify essential fields
-            if "upcoming_events" not in data or "past_events" not in data:
-                print("⚠️ Warning: Missing upcoming_events or past_events in events data")
+            if "featured_projects" not in data:
+                print("⚠️ Warning: Missing featured_projects in projects data")
                 return False
             
-            if not data["upcoming_events"] or not data["past_events"]:
-                print("⚠️ Warning: Empty upcoming_events or past_events in events data")
+            if not data["featured_projects"]:
+                print("⚠️ Warning: Empty featured_projects in projects data")
                 return False
             
-            print("✅ Events data contains all required fields")
+            # Verify project structure
+            for project in data["featured_projects"]:
+                required_fields = ["title", "description", "link", "type"]
+                missing_fields = [field for field in required_fields if field not in project]
+                
+                if missing_fields:
+                    print(f"⚠️ Warning: Project missing fields: {', '.join(missing_fields)}")
+                    return False
+            
+            print("✅ Projects data contains all required fields")
             return True
         return False
 
